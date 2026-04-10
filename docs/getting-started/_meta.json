@@ -1,0 +1,17 @@
+[
+  {
+    "type": "file",
+    "label": "Introduction",
+    "name": "introduction"
+  },
+  {
+    "type": "file",
+    "label": "Logging In",
+    "name": "login"
+  },
+  {
+    "type": "file",
+    "label": "Interface Overview",
+    "name": "interface-overview"
+  }
+]

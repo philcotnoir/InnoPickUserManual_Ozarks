@@ -1,0 +1,7 @@
+[
+  { "type": "file", "name": "home-page",  "label": "Home Page"  },
+  { "type": "file", "name": "alerts-page",  "label": "Alerts Page"  },
+  { "type": "file", "name": "inventory-section",  "label": "Inventory Section"  },
+  { "type": "file", "name": "case-sequence",  "label": "Case Sequence"  },
+  { "type": "dir", "name": "administration",  "label": "Administration"  }
+]

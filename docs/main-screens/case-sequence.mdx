@@ -1,0 +1,197 @@
+# Case Sequence Page
+
+**[Home](../index.md) > [Main Screens](index.md) > Case Sequence**
+
+
+
+## Overview
+
+The Case Sequence page displays the order in which cases will exit InnoPick and arrive at the palletizers. This powerful tool allows operators to track individual cases, verify sequencing, and troubleshoot order fulfillment issues.
+
+<img src="../images/case-sequence/image39.png" width="1600" alt="Case Sequence Page"/>
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Understanding the Case Sequence
+
+The case sequence represents:
+
+- The exact order cases will exit InnoPick (per level)
+- Which cases belong to which customer pallets
+- Current status of each case (pending, in progress, completed, cancelled)
+- Which downstream destination each case is destined to
+
+This information is critical for:
+
+- Verifying correct order fulfillment
+- Tracking specific cases or pallets
+- Troubleshooting sequencing issues
+- Monitoring production progress
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Case Sequence Columns
+
+Each case in the sequence has the following information:
+
+### Case Ref
+- Internal case tracking number
+- Unique identifier for each individual case
+- Used for detailed case tracking and troubleshooting
+
+### PalletRef
+- Pallet ID for the customer pallet this case belongs to
+- Multiple cases with the same PalletRef are part of the same order
+- Useful for tracking pallet completion
+
+### Product
+- SKU code of the product
+
+### Product Description
+- Configured product name
+
+### State
+Cases progress through these states:
+
+- **Pending**: Case is scheduled but not yet scheduled
+- **In Progress**: Case is scheduled, which means currently visible on the sequence conveyor as an empty or full square (output case).
+- **Completed**: Case has been successfully output from InnoPick
+- **Cancelled**: Case has been removed from the sequence (see [Actions](#actions) below)
+
+### Origin
+- Pallet ID of the replenishment that brought this case into InnoPick
+- Tracks the source of the case
+- Useful for tracing product batches or investigating quality issues
+
+### Exit Level
+- The InnoPick level the case is assigned to
+- Indicates which physical level will output this case
+
+### Enter Inventory
+- Date and time the case entered InnoPick
+- Useful for tracking case age and identifying stale inventory
+
+### Destination
+- Which downstream equipment will receive the case
+- Typical values: Merge A, Merge B, or other merge point designation
+- Used by InnoPick to route cases correctly
+
+### Actions
+The only action available on this page is:
+
+#### Cancel Case
+<img src="../images/case-sequence/cancelcase.png" width="600" alt="Case Sequence Search"/>
+
+  - Removes the case from the active sequence
+  - Changes state to "Cancelled"
+  - **Warning**: During normal operations, it should not be necessary to cancel cases from the case sequence. This should only be done as part of a larger recovery effort in coordination with system experts or remote support.
+
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Using Search and Filters
+
+<img src="../images/case-sequence/image40.png" width="1600" alt="Case Sequence Search"/>
+
+The Case Sequence page becomes particularly powerful when filters are applied.
+
+---
+
+### Search Bar
+
+Use the search bar to quickly find cases by:
+
+- Case reference number
+- Pallet ID
+- Product SKU
+- Product description
+- Any keyword in the displayed fields
+
+---
+
+### Common Filtering Scenarios
+
+#### Find All Cases for a Specific Pallet
+1. Enter the Pallet ID in the search bar
+2. All cases for that pallet will be displayed
+3. Verify the sequence is correct
+4. Check that all expected cases are present
+
+#### Find Cases by Level
+1. Filter by Exit Level
+2. See all cases scheduled for a specific level
+3. Useful for level-specific troubleshooting
+
+#### Find Cancelled Cases
+1. Filter by State = Cancelled
+2. Review which cases have been removed from sequence
+
+#### Find Cases from a Specific Replenishment
+1. Search or filter by Origin (Pallet ID of replenishment)
+2. See all cases from that replenishment
+3. Useful for tracking product batches or investigating quality issues
+
+#### Find Cases by Destination
+1. Filter by Destination (Merge A, Merge B, etc.)
+2. Verify routing is correct
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Using Case Sequence for Troubleshooting
+
+### Tracking a Missing Case
+
+If a case doesn't arrive at the palletizer when expected:
+
+1. **Search for the case** by Pallet ID or Case Ref
+2. **Check the State:**
+    - Pending: Still waiting to be processed (or was somehow missed because of a system glitch)
+      - Often, a pending case indicates the system is still waiting for a replenishment to provide that case
+    - In Progress: On conveyor or in lane - check [Home Page Inventory Graph](home-page.md#inventory-graph)
+    - Completed: InnoPick released it - check downstream tracking
+    - Cancelled: Was removed - determine why
+
+3. **Verify the case details:**
+    - Correct product?
+    - Correct destination?
+    - Correct level?
+
+4. **Take appropriate action** based on findings.
+    - If a case is stuck in pending mode and no replenishment for that product is on its way, contact support.
+
+---
+
+### Verifying Pallet Completion
+
+To confirm all cases for a pallet have been output:
+
+1. **Search for the Pallet ID**
+2. **Check the State of all cases:**
+    - All should be "Completed" for a finished pallet
+    - If any are Pending or In Progress, pallet is not complete
+    - A pending case usually indicates the system is still waiting for a replenishment to provide that case
+    - Note any Cancelled cases
+
+---
+
+### Investigating Sequencing Problems
+
+If cases are arriving in wrong order:
+
+1. **Compare actual sequence** to expected order
+2. **Filter by Exit Level and Destination**
+3. **Check for:**
+    - Cases from wrong level
+    - Cases routed to wrong destination
+    - Cancelled cases affecting sequence
+4. **Correct the sequence** if sequence is incorrect.
+5. *If InnoPick appears to be building an incorrect sequence, or the sequence in InnoPick does not match that of MixMaster, contact support.*
+
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Home Page Inventory Graph](home-page.md#inventory-graph) - Visual representation of In Progress cases
+- [Replenishments](inventory-section.md#replenishments-page) - Source of cases entering sequence
+

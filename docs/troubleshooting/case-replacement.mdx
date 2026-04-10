@@ -1,0 +1,210 @@
+# Case Replacement Procedures
+
+**[Home](../index.md) > [Troubleshooting](index.md) > Case Replacement**
+
+
+
+## Overview
+
+This page provides procedures for replacing broken, missing, or incorrect cases during InnoPick operation. Proper case replacement is critical to maintaining accurate inventory tracking and preventing cascading faults.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## When Case Replacement is Needed
+
+Common scenarios requiring case replacement:
+
+- **Broken case**: Case damaged, collapsed, or torn
+- **Missing case**: Case fell off, removed, or never present
+- **Wrong product**: Incorrect SKU inducted
+- **Quality issue**: Case rejected for damage or defects
+- **Operator error**: Case removed during troubleshooting
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## General Principles
+
+### Before Replacing Any Case
+
+1. **Understand why the case needs replacement**
+    - What happened to the original case?
+    - Is this an isolated incident or pattern?
+    - Will the same issue affect the replacement?
+
+2. **Determine the correct product**
+    - Check what product is expected
+    - Verify SKU from alert message or Inventory Graph
+    - Confirm with [Replenishments Page](../main-screens/inventory-section.md#replenishments-page) or [Case Sequence Page](../main-screens/case-sequence.md)
+
+3. **Know where to place the replacement**
+    - Sequence conveyor vs. storage lane
+    - Specific position on conveyor
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Scenario 1: Replace Case Currently Being Inducted
+
+**Situation:**
+
+- Case is currently part of an active replenishment
+- Case is already in InnoPick
+- Case is broken, too damaged, or wrong product
+
+### Procedure
+
+1. **Obtain replacement case:**
+    - Take one from upstream conveyor system
+    - Ensure it's the correct product
+
+2. **Update upstream system:**
+    - Delete 1 Case Data on upstream conveyor HMI
+    - This prevents tracking mismatch
+
+3. **Short the replenishment in InnoPick Manager:**
+    - Go to [Replenishments Page](../main-screens/inventory-section.md#replenishments-page)
+    - Find the active replenishment
+    - Use **Alter Quantity** action (three dots menu)
+    - Reduce quantity by 1
+
+4. **Place replacement case:**
+    - Position on the case exactly where the broken was (or was supposed to be)
+    - Ensure proper orientation
+
+5. **Resume operation:**
+    - Clear any alerts if present
+    - Verify the case stores correctly
+    - Monitor the transition to the next replenishment
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Scenario 2: Damaged Inbound Case on Sequence Conveyor is Not Needed for Client Pallet
+
+**Situation:**
+
+- Case is on the sequence conveyor and is going to be stored
+- No replacement cases are readily available
+- Case will NOT be needed for upcoming orders
+  - This can be determined if: There are no additional replenishment scheduled for this product (filter for this product & level in the Replenishments page to determine this).
+
+**If no other replenishment scheduled:**
+
+- InnoPick can function without this case
+- Case can be shorted rather than replaced
+- **Replacement is optional**
+
+### Procedure
+
+#### Short the Case
+
+1. **Allow the storage move to fault:**
+    - **[Alert 121 (photocell never detected case)](../troubleshooting/alert-reference.md#121-photocell-above-lane-never-detected-the-case-during-a-storing-move)** will occur
+    - System expects to store a case but finds none
+
+2. **Jog lane so it is ready to dispense**
+    - Use [Manual motion control > Lane Operations](../main-screens/administration/manual-motion-control.md#lane-operations)
+    - Jog lane forward so existing cases move up
+    - Front case can now be dispensed
+
+3. **Short the lane inventory:**
+    - Go to [Lane Inventory Page](../main-screens/inventory-section.md#lane-inventory-page)
+    - Find the affected lane
+    - Reduce quantity by 1
+
+4. **Clear alerts and resume**
+
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Scenario 3: Replace Missing Outfeed Case
+
+**Situation:**
+
+- Alert: "Expecting a case but there is no case present at the outfeed"
+- Case should be at last InnoPick position but is missing
+- See [Alert Reference](alert-reference.md#expecting-a-case-but-there-is-no-case-present-at-the-outfeed) for detailed alert resolution
+
+### Procedure
+
+1. **Identify the expected case:**
+    - Check [Inventory Graph](../main-screens/home-page.md#inventory-graph)
+    - Note product SKU and pallet ID
+    - Determine from which lane it should have come
+
+2. **Determine why case is missing:**
+    - Was it never dispensed from lane?
+    - Did it fall off somewhere?
+    - Was it incorrectly removed?
+    - Is sequence conveyor offset by one position?
+
+3. **Obtain replacement case:**
+    - Must be exact product that was expected
+    - Check case label/markings
+
+4. **Place case at outfeed position:**
+    - Must block the last sensor on InnoPick
+    - Position correctly for downstream equipment
+    - Verify orientation
+
+5. **Verify Inventory Graph:**
+    - Should now show filled square at last position
+    - Matches physical case
+
+6. **Clear alert and resume**
+
+7. **Monitor closely:**
+    - Verify subsequent cases are tracking correctly
+    - Watch for signs of offset sequence conveyor
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Special Considerations
+
+### Quality Control
+
+If replacing due to quality issue:
+
+- Note the specific problem
+- Report pattern of defects to supervision
+- May indicate supplier issue
+
+### Inventory Accuracy
+
+After any replacement:
+
+- Verify all counts are correct
+- Check [Lane Inventory](../main-screens/inventory-section.md#lane-inventory-page)
+- Confirm [Replenishments Page](../main-screens/inventory-section.md#replenishments-page) quantities
+- Ensure [Inventory Graph](../main-screens/home-page.md#inventory-graph) matches reality
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Preventing Case Replacement Needs
+
+### Best Practices
+
+**Visual Inspections:**
+
+- Check case quality of the cases in InnoPick
+- Monitor cases as they induct
+
+**Proper Handling:**
+
+- Ensure upstream handling doesn't damage cases
+- Ensure upstream handling properly identifies and rejects damaged or turned cases
+
+**Maintain Tracking Accuracy:**
+
+- Always follow [Alert Guidelines](alert-guidelines.md)
+- Verify Inventory Graph after every alert
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Alert Reference](alert-reference.md) - Specific alerts requiring case replacement
+- [Alert Guidelines](alert-guidelines.md) - Proper alert recovery procedures
+- [Lane Inventory](../main-screens/inventory-section.md#lane-inventory-page) - Updating lane contents
+- [Replenishments Page](../main-screens/inventory-section.md#replenishments-page) - Adjusting quantities
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+

@@ -1,0 +1,114 @@
+**[Home](../index.md) > [Troubleshooting](index.md) > Case Centering Adjustments**
+
+
+
+## Overview
+
+InnoPick requires precise parameterization in order for cases to be accurately centered all the way from the infeed to the last buffer lane.
+
+This page walks through the proper process for ensuring good case centering.
+
+---
+
+## Step-by-Step Sequence for Proper Case Centering
+
+### 1. Validate Sequence Conveyor Chain Tension
+
+- It's not uncommon to have to adjust the case centering parameters after tensionning sequence conveyor chains.
+- Therefore, if it is needed, it's best to do that first.
+
+
+
+### 2. Adjust the "Center Placement in Millimeters" Parameter
+<img src="../images/administration/sitelevels.png" width="900" alt="Site Levels Configuration"/>
+
+On the **Administration > Setup InnoPick > [Site Levels](../main-screens/administration/setup-innopick.md#site-levels)** page, adjust the **"Center placement in millimeters"** parameter so that cases are properly centered in front of the first buffer lane (the one closest to the infeed).
+
+**Procedure:**
+
+1. Stop InnoPick when a case is positioned in front of the first lane (closest to the infeed).
+2. Calculate the adjustment required to be centered
+    - **Example**: The case is too far in the downstream direction, by 10mm
+3. Modify the **"Center placement in millimeters"** by **-10**, and let a new case enter to re-validate
+    - ⚠️ **Note**: The change will only be applied to the next case that is inducted on the infeed section of the upstream conveyor
+4. Continue until cases are properly centered in front of the first lane
+
+
+
+### 3. Test Alignment Along the Entire Length of InnoPick
+
+Next, place a perfectly centered case in front of the first lane, and manually jog the sequence conveyor until the case is in front of the last lane (nearest the outfeed).
+
+[Click here for information on manually jogging InnoPick](../main-screens/administration/manual-motion-control.md#level-operations)
+
+**Important**: When you jog, make sure that the value used for the jogging (on the Manual Motion Controls page) is the same as the **"Lane Pitch in Millimeters"** parameter on the Site Levels page.
+
+- It is usually necessary to input the correct distance from the Lane Pitch paramater for this exercise, in order to recreate the actual movement distances seen in production.
+
+
+
+
+### 4. Measure the Necessary Adjustment
+
+- Go to the case stopped in front of the last buffer lane.
+- Measure the adjustment necessary for it be properly centered, and divide the adjustment by the number of positions on the sequence conveyor (visible on the inventory graph).
+
+<img src="../images/administration/positions.png" width="200" alt="Site Levels Configuration"/>
+- In the example above, there are 71 positions.
+
+
+
+### 5. Calculate the Lane Pitch Correction
+
+**Example:**
+
+- Need to adjust the position by **12mm toward upstream** (case is too far toward downstream)
+- The InnoPick has **71 positions**
+- Calculation: **12mm ÷ 71 positions = 0.17mm**
+
+
+
+### 6. Apply the Correction
+
+Adjust the **"Lane Pitch in Millimeters"** parameter by the result of your calculation in Step 5.
+
+**Important Note:**
+
+- If the adjustment is towards the upstream, subtract the value from the current Lane Pitch distance. This will reduce the size of the standard move and result in the case moving a smaller distance, ending up more upstream.
+- If the adjustment is towards the downstream, add the value to the current Lane Pitch distance. This will increase the size of the standard move and result in the case moving a greater distance, ending up further downstream.
+
+**Example (continued):**
+
+- If our calculation resulted in a value of 0.17mm
+- And the Lane Pitch parameter is currently at **558.80mm**
+- We will subtract the calculated value from the parameter value:
+  - **558.80 - 0.17 = 558.63mm**
+
+### 7. Final Validation
+
+Validate the new value by repeating the test and ensuring that the case ends up properly centered in front of the last lane (near the outfeed).
+
+---
+
+## Parameter Summary
+
+| Parameter | Location | Function |
+|-----------|----------|----------|
+| **Center Placement in Millimeters** | Administration > Setup InnoPick > Site Levels | Used to set initial center position, which is validated in front of the **first** lane |
+| **Lane Pitch in Millimeters** | Administration > Setup InnoPick > Site Settings | Defines the standard sequence conveyor move distance, used for maintaining centering along the **entire length** of InnoPick, and validated in front of the **last** lane |
+
+---
+
+## Calculation Formula
+```
+Lane Pitch Adjustment = Total Error (mm) ÷ Number of Positions
+```
+
+**Direction of adjustments:**
+
+- Case too far **downstream** → **Negative** (-) adjustment
+- Case too far **upstream** → **Positive** (+) adjustment
+
+
+
+

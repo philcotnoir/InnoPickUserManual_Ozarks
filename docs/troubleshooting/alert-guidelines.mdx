@@ -1,0 +1,296 @@
+# Alert Guidelines
+
+**[Home](../index.md) > [Troubleshooting](index.md) > Alert Guidelines**
+
+
+
+## Overview
+
+This page provides general principles and best practices for successfully resolving InnoPick alerts. Following these guidelines will help you avoid cascading faults and minimize downtime.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Understanding Level Status Colors
+
+When alerts occur, InnoPick changes the level status indicators to show the severity and type of issue.
+
+---
+
+### Level Color Meanings
+
+<img src="../images/home/image10.png" width="200" alt="Level Status Colors"/>
+
+- **Green**: Automatic mode - system is operating normally
+- **Yellow**: Manual mode - system is paused
+- **Red**: Fault mode - system has an active alert that stopped operation
+- **Dark Red**: E-Stop active - safety system engaged (door open or E-Stop pressed)
+- **Blue**: Communication Loss
+
+---
+
+### Alert Progression
+
+**When an alarm occurs:**
+
+1. InnoPick stops the affected level
+2. Level enters Fault mode (Red) or E-Stop status (Dark Red)
+3. Alert appears on [Home Page](../main-screens/home-page.md) and [Alerts Page](../main-screens/alerts-page.md)
+
+**After clearing the alarm:**
+
+1. Level goes to Manual mode (Yellow)
+2. Operator can verify conditions are correct
+3. Level can be put back into Automatic mode (Green)
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Six General Guidelines for Operating InnoPick Successfully
+
+Following these guidelines will prevent most cascading faults and reduce troubleshooting time.
+
+---
+
+### Guideline 1: Always Compare Physical Reality to the Inventory Graph
+
+**When responding to an Alert, always verify physical cases match their position on the Inventory Graph.**
+
+The [Inventory Graph](../main-screens/home-page.md#inventory-graph) is the gold standard for what should be where. Physical cases should ALWAYS match the graph.
+
+#### Why This Matters
+
+- A good operator always double-checks visuals after clearing faults
+- This is the absolute best way to avoid knock-on faults from incorrect recoveries
+- Most cascading faults occur because this step was skipped
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Guideline 2: After Store/Dispense Alerts, Check Physical Case Position
+
+**Always verify where the case actually ended up.**
+
+#### After a Store Fault:
+
+- Case should be in the storage lane
+- Verify it's not blocking the photocell
+- Confirm it's properly positioned
+
+#### After a Dispense Fault:
+
+- Case should be on the sequence conveyor
+- Verify it cleared the photocell
+- Confirm proper spacing to adjacent cases
+
+#### If in doubt, check the lane case count (inventory).
+
+This is a general guideline, but remember Guideline #1 - the Inventory Graph is your ultimate reference.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Guideline 3: Check Replenishment Status After Any Infeed Alarm
+
+**Infeed alarms require extra vigilance about several details.**
+
+Infeed alarms are confusing because they occur where two different systems connect. Problems can originate on either side, and if not properly identified and corrected, more issues will follow.
+
+#### After Every Infeed Alarm, Check:
+
+1. **Product (SKU) is correct**
+    - Case matches what was expected
+    - Replenishment is for the right product
+
+2. **Number of cases inducted (or yet-to-be inducted) is correct**
+    - Go to [Replenishments Page](../main-screens/inventory-section.md#replenishments-page)
+    - Verify inducted quantity
+    - Check that 'quantity to induct' is accurate
+
+3. **Upstream conveyor system has correct tracking data**
+    - Cases are properly tracked upstream
+    - No missing or extra cases in upstream system
+
+4. **If cases had to be moved, follow Guideline 1**
+    - Resume in Automatic mode for a few moves
+    - Verify case placement on sequence conveyor
+    - Ensure inventory graph matches physical reality
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Guideline 4: Determine if Alert is Stand-Alone or a Symptom
+
+**Consider whether the alert is an isolated incident or indicates a bigger issue.**
+
+#### Symptom Alerts
+
+Certain alerts are **rarely stand-alone problems** and usually indicate previously mishandled faults or bigger issues. Correctly identifying this makes **the difference between:**
+
+- One 4-minute stoppage (properly handled)
+- Five stoppages costing 25 minutes (symptom not recognized)
+
+#### Common Symptom Alerts:
+
+These typically indicate inventory graph doesn't match physical reality:
+
+- **[Fault Code 121](alert-reference.md#121-photocell-above-lane-never-detected-the-case-during-a-storing-move)**: *Photocell above lane never detected case during storing move*
+- **[Fault Code 123](alert-reference.md#123-124-photocell-above-lane-never-detected-the-case-during-a-dispense-move)**: *Photocell never detected case during dispense move*
+- ***[Expecting a case but there is no case present at the outfeed](alert-reference.md#expecting-a-case-but-there-is-no-case-present-at-the-outfeed)***
+- ***[Not expecting a case but there is a case at the outfeed](alert-reference.md#not-expecting-a-case-but-there-is-a-case-at-the-outfeed)***
+
+These faults typically show up when someone has not followed Guideline #1.
+
+#### When You See Symptom Alerts:
+
+1. Stop and assess the situation
+2. Review recent alert history
+3. Check if earlier fault was improperly resolved
+4. Verify that the inventory graph matches physical reality
+5. Correct any discrepancies before clearing alert and resuming production
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Guideline 5: Be Aware of InnoPick Settings
+
+**Always understand current system settings and their implications.**
+
+A good operator is aware of settings that affect InnoPick's behavior. Failing to understand current settings leads to serious operator mistakes.
+
+#### Key Settings to Monitor:
+
+#### Pause Infeed / Pause Outfeed
+- Controls whether cases enter or exit InnoPick
+- Check: [Home Page](../main-screens/home-page.md)
+
+#### Build Inventory Mode
+- When ON: Prioritizes storing replenishments over outputting cases
+- When OFF: Balances input and output for maximum throughput
+- Check: [Build Inventory](../main-screens/administration/setup-innopick.md#build-inventory)
+
+#### Destination (Merge) A or B Enabled / Disabled
+- Controls which downstream destinations are active
+- If a Merge is disabled, all cases route to other destination(s)
+- Check: [Administration > Setup InnoPick > Merges](../main-screens/administration/setup-innopick.md#buffer)
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Guideline 6: Be Aware of Other System Settings
+
+**InnoPick is connected to other systems that directly affect its behavior.**
+
+#### Systems That Affect InnoPick:
+
+#### MixMaster (or equivalent WMS/WCS)
+**Impact Examples:**
+
+- **HOLD on a pallet**: InnoPick won't schedule output cases for it or subsequent pallets
+- **Order changes**: May affect case sequence and replenishment needs
+
+#### Inbound Conveyor System (Pre-InnoPick)
+**Impact Examples:**
+
+- **HOLD enabled**: Cases won't be released to InnoPick
+- **Tracking errors**: Wrong cases or quantities arrive
+- **Photocell issues**: Cases arrive unexpectedly
+
+#### Outbound Conveyor System (Post-InnoPick)
+**Impact Examples:**
+
+- **HOLD or fault active**: InnoPick cannot release cases at outfeed
+- **Accumulation full**: Output stops even if InnoPick is ready
+- **Downstream equipment down**: Cases back up into InnoPick
+
+#### When Troubleshooting:
+
+1. **Check downstream first** if output issues occur
+2. **Check upstream first** if infeed issues occur
+3. **Coordinate with other system operators** to understand full picture
+4. **Verify communication** between systems is working
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Clearing Alerts
+
+### When to Clear Alerts
+
+Clear alerts only when:
+
+- ✓ Underlying physical issue is resolved
+- ✓ Cases are in correct positions
+- ✓ Inventory graph matches reality
+- ✓ Sensors are unblocked
+- ✓ Mechanical issues are fixed
+- ✓ Safety devices are reset
+
+---
+
+### When Alerts Won't Clear
+
+If alerts cannot be cleared, it usually means the underlying issue has not been resolved.
+
+**Common reasons alerts won't clear:**
+
+- Photocell sensor still blocked
+- E-Stop button still pressed
+- Door still open
+- Case still in wrong position
+- Mechanical issue not resolved
+- The Alert in question is being filtered (not visible).
+  - [See how to View All Alerts](../main-screens/alerts-page.md#viewing-all-alerts)
+
+**What to do:**
+
+1. Read the alert message carefully
+2. Inspect physical conditions
+3. Resolve the actual problem
+4. Try clearing again
+     - Use the [Recovery Action: Send Clear Alarm on Level](../main-screens/administration/recovery-actions.md#most-commonly-used-recovery-actions)
+5. See [Alert Reference](alert-reference.md) for specific alert resolution steps
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Recognizing Symptoms of Bigger Issues
+
+### Single Occurrence vs. Pattern
+
+**If an alert occurs once:**
+
+- Likely an isolated incident
+- Resolve and monitor
+- Document but may not indicate systemic issue
+
+**If same alert repeats:**
+
+- Indicates underlying problem not fully resolved
+- Stop and reassess
+- Don't just keep clearing and restarting
+- Look for root cause
+
+---
+
+### Multiple Related Alerts
+
+**If different but related alerts occur in sequence:**
+
+- May be cascading effects from one root cause
+- Example: Infeed issue → Storage fault → Dispense fault
+- Address the earliest/root issue first
+- Verify inventory graph accuracy
+- May need to stop and reset entire level
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Best Practices Summary
+
+1. **Inventory Graph is Truth** - Always verify physical matches visual
+2. **Verify Case Position** - After store/dispense, check where case ended up
+3. **Check Replenishments** - After any infeed alarm, verify quantities and tracking
+4. **Look for Root Causes** - Some alerts are symptoms, not standalone issues
+5. **Know Your Settings** - Understand how system is configured
+6. **Check Connected Systems** - Upstream and downstream affect InnoPick
+7. **When in Doubt, Ask** - Better to escalate than cause more problems
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Alert Reference](alert-reference.md) - Specific resolution procedures for each alert code
+- [Home Page Inventory Graph](../main-screens/home-page.md#inventory-graph) - Understanding the visual display
+- [Monitoring Production](../daily-operations/monitoring.md) - Catching issues early
+

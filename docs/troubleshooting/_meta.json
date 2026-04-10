@@ -1,0 +1,37 @@
+[
+  {
+    "type": "file",
+    "label": "Common Issues",
+    "name": "common-issues"
+  },
+  {
+    "type": "file",
+    "label": "Alert Guidelines",
+    "name": "alert-guidelines"
+  },
+  {
+    "type": "file",
+    "label": "Alert Reference",
+    "name": "alert-reference"
+  },
+  {
+    "type": "file",
+    "label": "Deadlocks",
+    "name": "deadlocks"
+  },
+  {
+    "type": "file",
+    "label": "Case Replacement",
+    "name": "case-replacement"
+  },
+  {
+    "type": "file",
+    "label": "Case Centering",
+    "name": "casecentering"
+  },
+  {
+    "type": "file",
+    "label": "Disabled Lane",
+    "name": "disabledlane"
+  }
+]

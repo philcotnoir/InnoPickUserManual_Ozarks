@@ -1,0 +1,32 @@
+[
+  {
+    "type": "file",
+    "name": "index",
+    "label": "Home"
+  },
+  {
+    "type": "dir",
+    "name": "getting-started",
+    "label": "Getting Started"
+  },
+  {
+    "type": "dir",
+    "name": "daily-operations",
+    "label": "Daily Operations"
+  },
+  {
+    "type": "dir",
+    "name": "main-screens",
+    "label": "Main Screens"
+  },
+  {
+    "type": "dir",
+    "name": "troubleshooting",
+    "label": "Troubleshooting"
+  },
+  {
+    "type": "file",
+    "name": "reference/index",
+    "label": "Reference"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "type": "file",
+    "label": "Manual Motion Control",
+    "name": "manual-motion-control"
+  },
+  {
+    "type": "file",
+    "label": "Setup InnoPick",
+    "name": "setup-innopick"
+  },
+  {
+    "type": "file",
+    "label": "Algorithm Parameters",
+    "name": "algo-parameters"
+  },
+  {
+    "type": "file",
+    "label": "User Manager",
+    "name": "user-manager"
+  },
+  {
+    "type": "file",
+    "label": "Recovery Actions",
+    "name": "recovery-actions"
+  },
+  {
+    "type": "file",
+    "label": "Operations",
+    "name": "operations"
+  },
+  {
+    "type": "file",
+    "label": "User Settings",
+    "name": "user-settings"
+  }
+]

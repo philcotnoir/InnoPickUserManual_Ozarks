@@ -1,0 +1,170 @@
+# Troubleshooting
+
+**[Home](../index.md) > Troubleshooting**
+
+
+
+## Overview
+
+This section provides guidance for resolving alerts, troubleshooting common issues, and recovering from problems during InnoPick operation.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Troubleshooting Resources
+
+### [Guidelines for Resolving Alerts](alert-guidelines.md)
+General principles and best practices for resolving alerts successfully, including:
+
+- Understanding level status colors
+- General guidelines for operating InnoPick
+- When alerts indicate bigger issues
+- Important system settings that affect behavior
+
+---
+
+### [Alerts Reference](alert-reference.md)
+Complete listing of all InnoPick alerts with:
+
+- Alert code and description organized by ranges
+- Explanation and common causes
+- Step-by-step resolution procedures
+- Quick navigation by alert code ranges
+
+---
+
+### [Common Issues](common-issues.md)
+Frequently encountered problems and their solutions:
+
+- Outfeed faults
+- Infeed issues
+- Sequencing problems
+- Performance issues
+
+---
+
+### [Case Replacement](case-replacement.md)
+Procedures for replacing broken, missing, or incorrect cases during operation.
+
+---
+
+### [Case Centering Adjustments](casecentering.md)
+Procedures for adjusting the centering of cases on a given level.
+
+---
+
+### [Deadlocks](deadlocks.md)
+Explanations of and guidance for resolving deadlock situations.
+
+---
+
+### [Disabling an Active Lane](disabledlane.md)
+Guidance on how to handle disabling a lane that has incoming replenishment cases or already-scheduled output cases.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Quick Reference by Symptom
+
+**System won't start:**
+
+→ Check for [E-Stop condition](alert-reference.md#555-e-stop-condition-active-safety-is-disarmed-door-opened-or-e-stop-pressed)
+→ Verify no [unresolved or hidden alerts](../main-screens/alerts-page.md#viewing-all-alerts)
+
+**Alert won't clear:**
+
+→ See [Alert Guidelines](alert-guidelines.md#when-alerts-wont-clear)
+→ Verify physical issue is resolved
+→ Use [Recovery Action](../main-screens/administration/recovery-actions.md) to send a clear alarm to the motion controller.
+
+**Case missing from sequence:**
+
+→ See [Case Replacement](case-replacement.md)
+→ Check [Case Sequence Page](../main-screens/case-sequence.md)
+
+**Repeated same alert:**
+
+→ See [Alert Guidelines](alert-guidelines.md#recognizing-symptoms-of-bigger-issues)
+→ Check for underlying issues
+
+**Photocell fault:**
+
+→ See [Alert Reference](alert-reference.md) codes 109, 119, 121, 123, 709
+
+**Clutch fault:**
+
+→ See [Alert Reference](alert-reference.md) codes 310, 333, 334, 340
+
+**Infeed problem:**
+
+→ See [Alert Reference](alert-reference.md) codes 512, 515, 517
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Troubleshooting Approach
+
+### Step 1: Identify the Problem
+
+1. **Check the [Alerts Page](../main-screens/alerts-page.md)** for current alerts
+2. **Note the alert code and message**
+3. **Identify which level** is affected
+4. **Determine if this is** a new issue or recurring problem
+
+### Step 2: Understand the Situation
+
+1. **Read the alert description** in [Alert Reference](alert-reference.md)
+2. **Check the [Home Page Inventory Graph](../main-screens/home-page.md#inventory-graph)** - does it match physical reality?
+3. **Consider recent events** - what was happening when the alert occurred?
+4. **Look for patterns** - have similar alerts occurred recently?
+
+### Step 3: Resolve the Issue
+
+1. **Follow the resolution steps** in the Alert Reference
+2. **Verify physical conditions** match expected state
+3. **Make corrections** as needed
+4. **Clear the alert** only when underlying issue is resolved
+
+### Step 4: Verify Resolution
+
+1. **Resume operation** (put level back in Auto)
+2. **Monitor closely** for recurrence
+3. **Report persistent problems** to maintenance
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Safety Reminders
+
+- **Always use E-Stop** if there's immediate danger to personnel or equipment
+- **Never bypass safety interlocks** or disable safety devices
+- **Lock out equipment** before entering guarded areas
+- **Follow lockout/tagout procedures** for maintenance work
+- **Report safety concerns** immediately to supervision
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Prevention Tips
+
+### Reduce Alerts Through Good Practices
+
+- Perform visual inspections during [startup](../daily-operations/index.md#startup)
+- Monitor production actively as described in [Monitoring](../daily-operations/monitoring.md)
+- Address minor warnings before they become critical
+- Keep inventory graphs matched to physical reality
+- Maintain clear communication during shifts
+- Follow proper [shutdown procedures](../daily-operations/index.md#shutdown)
+
+### Maintain System Health
+
+- Report unusual sounds or movements immediately
+- Note patterns in alerts and report to maintenance
+- Keep documentation updated
+- Follow scheduled maintenance procedures
+- Address root causes, not just symptoms
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Daily Operations](../daily-operations/index.md) - Preventing issues through proper procedures
+- [Alerts Page](../main-screens/alerts-page.md) - Viewing and filtering alerts
+- [Home Page](../main-screens/home-page.md) - Monitoring system status
+- [Administration](../main-screens/administration/index.md) - Recovery actions for advanced issues
+

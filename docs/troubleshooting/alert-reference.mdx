@@ -1,0 +1,1940 @@
+# Alert Reference Page
+
+**[Home](../index.md) > [Troubleshooting](index.md) > Alert Reference**
+
+
+
+## Overview
+
+This page provides detailed information about every InnoPick alert code, including explanations, common causes, and step-by-step resolution procedures.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## How to Use This Reference
+
+1. **Find your alert code** in the list below
+2. **Read the explanation** to understand what happened
+3. **Review the possible causes**
+4. **Follow the solution steps** to resolve the issue
+5. **Verify resolution** before clearing the alert
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Alert Code Format
+
+Each alert entry follows this format:
+
+- **Alert Code - Description**
+- **Explanation & Causes**
+- **Solution**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 98 - ServoDrive Faulted while Moving (Sys_Flt)
+
+**Explanation:**
+
+The servo drive faulted during a motion operation.
+
+**Common Causes:**
+
+- Drive overload or overheating
+- Electrical fault in drive
+- Motor connection issue
+- Drive parameter error
+- Excessive load on axis
+
+**Solution:**
+
+1. Check drive status indicators/LEDs
+2. Verify motor connections
+3. Check for mechanical binding or excessive load
+4. Review drive fault code in servo drive diagnostics
+5. Contact maintenance if drive hardware fault suspected
+6. Clear alert after resolving issue
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 99 - ServoDrive Time-out Fault occurred during Start-up (Sys_Flt)
+
+**Explanation:**
+
+The servo drive did not respond in time during system start-up.
+
+**Common Causes:**
+
+- Connection issue in plug or cabling
+- Communication timeout
+- Rarely occurs when clearing and resuming from faults
+
+**Solution:**
+
+1. Attempt to clear the fault
+2. If it clears successfully, safe to put level back in automatic
+3. If fault persists or repeats, contact maintenance
+4. Notify supervisors for maintenance follow-up even if it clears
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 109 - Photocell above lane was still blocked after the end of the storing move
+
+**Explanation:**
+
+After storing a case into a buffer lane, the photocell remained blocked when it should be clear.
+
+**Common Causes:**
+
+- Turned or skewed case
+- Damaged case (torn cardboard, collapsed)
+- Wrong product (different case dimensions)
+- Case dimensions incorrectly referenced in system
+- Case too far forward in lane
+
+**Solution:**
+
+1. Visually inspect the lane and case
+2. Identify why photocell is still blocked
+3. Correct the issue:
+    - Adjust case position if needed
+    - Replace damaged case
+    - Retrieve correct product if wrong case
+    - Remove case entirely if necessary
+4. Ensure photocell is clear
+5. Verify other cases in lane are properly positioned
+6. Clear the alert
+7. Resume operation
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 113 / 117 - Buffer lane tried to dispense a case but the case was too far back
+
+**Explanation:**
+
+InnoPick tried to dispense a case from buffer lane, but no case blocked the photocell during the dispense move, or case was detected later than expected.
+
+**Common Causes:**
+
+- No case present in lane (inventory count wrong)
+- Case too far back from front of lane
+- Case fell or was removed
+- Gaps between cases too large
+- Lane position tracking error
+
+**Solution:**
+
+**If no case is present:**
+
+1. Find replacement case with correct product
+2. Place it on the **sequence conveyor** in front of the lane (NOT in the buffer lane)
+3. Verify position matches Inventory Graph
+4. Clear alert
+
+**If case is too far back:**
+
+1. InnoPick reached maximum programmed advance distance
+2. Either:
+    - Manually adjust cases in lane, OR
+    - Jog the lane forward to fully dispense the case
+3. Ensure case is now on sequence conveyor
+4. Verify position on Inventory Graph
+5. Clear alert
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 115 - Buffer lane tried to dispense a case but the case was too close to the front
+
+**Explanation:**
+
+Dispense case was detected earlier than expected (case seen too early).
+
+**Common Causes:**
+
+- Case positioned too far forward in lane
+- Case moved forward unexpectedly
+- Lane position tracking error
+
+**Solution:**
+
+1. Verify actual case position in lane
+2. Check other cases in lane for proper spacing
+3. Adjust case position if needed
+4. Verify case dimensions match product configuration
+5. Clear alert once position is correct
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 119 - Photocell still blocked after dispensing
+
+**Explanation:**
+
+The photocell for that lane remained blocked at the end of the dispense move.
+
+**Common Causes:**
+
+- Broken case (collapsed, torn cardboard)
+- Ripped cardboard hanging down
+- Crooked or skewed case
+- Wrong case dimensions (didn't fault on storing)
+- Cases poorly referenced with irregular gaps
+
+**Solution:**
+
+1. Inspect the lane photocell area
+2. Identify what is blocking the photocell
+3. Correct the issue:
+    - Remove damaged cardboard or case parts
+    - Straighten crooked case
+    - Verify dispensed case is properly positioned on sequence conveyor
+4. Check other cases in buffer lane:
+    - Ensure proper positioning
+    - Verify adequate gaps
+    - Confirm ready to dispense next case
+5. Clear photocell completely
+6. Verify on Inventory Graph
+7. Clear alert
+8. Monitor next few dispenses from this lane
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 121 - Photocell above lane never detected the case during a storing move
+
+**Explanation:**
+
+InnoPick attempted to store a case, but the photocell was never blocked during the move, indicating there was no case present.
+
+**Most Common Causes:**
+
+- No case present at all
+- Inventory count was wrong
+- Bad recovery from previous infeed issue
+- Case removed and not replaced
+
+**Less Common Causes:**
+
+- Case snagged or displaced
+- Case in wrong position to be picked up by pop-up
+- Sequence conveyor offset by one or more positions
+
+**Solution:**
+
+**If case is simply missing:**
+
+1. Determine correct product from alert details
+2. Find replacement case
+3. Place on sequence conveyor in expected position
+4. Verify Inventory Graph matches
+5. Clear alert
+
+**If case is displaced:**
+
+1. Locate the case
+2. Position correctly for pop-up to engage
+3. Retry the store move
+4. Clear alert if successful
+
+**Important:** See [Alert Guidelines](alert-guidelines.md#guideline-4-determine-if-alert-is-stand-alone-or-a-symptom) - this is often a symptom of improper previous recovery.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 123 / 124 - Photocell above lane never detected the case during a dispense move
+
+**Explanation:**
+
+No case detected during dispense move when one was expected.
+
+**Common Causes:**
+
+- Case is missing (inventory count was wrong)
+- Case fell off conveyor
+- Case caught on something
+- Wrong lane actuated
+- Previous storage fault not properly resolved
+
+**Solution:**
+
+1. Check inventory count for this lane
+2. Locate the missing case or find replacement
+3. Place case in the storage lane at the front
+4. Jog lane forward to dispense case onto sequence conveyor
+5. Verify case position matches Inventory Graph
+6. Update lane inventory count if necessary
+7. Clear alert
+
+**Important:** See [Alert Guidelines](alert-guidelines.md#guideline-4-determine-if-alert-is-stand-alone-or-a-symptom) - often indicates inventory tracking issue.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 130 - Could not Execute a Sequence Conveyor Move. Timed Out Waiting for a previous Dispense Move to Finish
+
+**Explanation:**
+
+The sequence conveyor was ready to move but had to wait too long for a buffer lane dispense operation to complete, causing a timeout.
+
+**Common Causes:**
+
+- Lane dispense move taking excessive time
+- Mechanical issue slowing lane operation
+- Pop-up or clutch not disengaging properly
+- Communication delay between systems
+- Lane conveyor running slowly
+
+**Solution:**
+
+1. Check which lane was dispensing when timeout occurred
+2. Inspect that lane for:
+    - Mechanical binding or slowness
+    - Pop-up not retracting fully
+    - Clutch not disengaging cleanly
+3. Test lane operation manually if needed
+4. Verify lane motor and drive functioning properly
+5. Clear alert
+6. Monitor lane performance
+7. Contact maintenance if issue persists
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 152 - PopUp stayed down during store (300)
+
+**Explanation:**
+
+Pop-up assembly was detected in incorrect position (down) when it should have been up during a store operation.
+
+**Common Causes:**
+
+- Pneumatic system issue
+- Pop-up mechanism mechanical failure
+- Position sensor malfunction
+- Obstruction preventing pop-up from rising
+
+**Solution:**
+
+1. Verify pneumatic components:
+    - Air pressure adequate
+    - Solenoid valves functioning
+    - Air lines not blocked or leaking
+2. Check mechanical components:
+    - Pop-up shaft moves freely
+    - No obstructions
+    - Linkage intact
+3. Verify position sensors:
+    - Clean sensor faces
+    - Check sensor alignment
+    - Verify sensor wiring
+4. Remove any obstructing objects
+5. Test pop-up operation manually if safe
+6. Clear alert and test
+7. Contact maintenance if issue persists
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 153 - PopUp stayed down during dispense (301)
+
+**Explanation:**
+
+Pop-up assembly was detected in incorrect position during dispense operation.
+
+**Common Causes & Solution:**
+
+See alert 152 above - same troubleshooting applies.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 154 - PopUp stayed up after dispense (301)
+
+**Explanation:**
+
+Pop-up assembly did not retract after completing dispense operation.
+
+**Common Causes & Solution:**
+
+See alert 152 above - same troubleshooting applies, but focus on retraction mechanism and down position sensor.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 155 - PopUp never went down before store (300)
+
+**Explanation:**
+
+Pop-up assembly failed to fully retract before a store operation was attempted.
+
+**Common Causes & Solution:**
+
+See alert 152 above - same troubleshooting applies, with emphasis on:
+
+- Air cylinder air release adjustment
+- Solenoid valve operation
+- Down position sensor verification
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 156 - PopUp never went down before dispense (301)
+
+**Explanation:**
+
+Pop-up assembly failed to retract before dispense operation.
+
+**Common Causes & Solution:**
+
+See alert 152 above - same troubleshooting applies.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 310 - Clutch Fault: Mechanical engagement was not successfully completed after 15 attempts
+
+**Explanation:**
+
+The clutch assembly failed to engage properly after multiple attempts.
+
+**Common Causes:**
+
+- Mechanical failure in clutch assembly
+- Intermittent mechanical issue
+- Misalignment
+- Worn components
+- Obstruction
+
+**Solution:**
+
+1. Visually inspect clutch assembly if accessible
+2. Retry the move in Automatic mode while observing clutch
+3. Look for:
+    - Mechanical binding
+    - Worn parts
+    - Obstructions
+    - Misalignment
+4. If engagement seems to work sometimes, note conditions
+5. Document behavior for maintenance
+6. Mechanical intervention may be necessary
+7. Consider deactivating lane if repairs cannot be immediate
+8. Resume production on other lanes
+9. Contact maintenance
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 320 - Clutch Fault: Calculation Error in Mechanical Engagement Position
+
+**Explanation:**
+
+The system calculated an incorrect position for clutch mechanical engagement, indicating a software or calibration issue.
+
+**Common Causes:**
+
+- Clutch calibration drift
+- Position calculation error in software
+- Encoder feedback issue
+- Mechanical wear affecting expected positions
+- System parameters need updating
+
+**Solution:**
+
+1. Document current clutch position and behavior
+2. Note if this is first occurrence or recurring
+3. Check clutch engagement manually if safe
+4. Verify encoder feedback is working
+5. May require clutch recalibration
+6. Contact system expert or maintenance
+7. System parameters may need adjustment
+8. Clear alert after issue resolved
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 333 - Warning: Actual sensor transition was not seen, but system is assuming clutch was engaged properly
+
+**Explanation:**
+
+Proximity sensor did not detect expected transition, but system continued based on assumptions.
+
+**Common Causes:**
+
+- Sensor misalignment
+- Intermittent sensor issue
+- Mechanical timing variation
+- Sensor malfunction
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 334 - Clutch Fault: Prox sensor off after mechanical transition. Probably clutch mechanism bounce
+
+**Explanation:**
+
+Proximity sensor turned off after mechanical transition, likely due to clutch mechanism bouncing.
+
+**Common Causes:**
+
+- Mechanical bounce in clutch engagement
+- Worn clutch components
+- Improper clutch timing
+- Sensor positioning
+
+**Solution:**
+
+1. Verify clutch assembly condition
+2. Check for worn components
+3. May require mechanical adjustment
+4. Contact maintenance if repeats
+5. Clear alert
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 340 - Clutch Fault: Mechanical disengagement was not successfully completed after 15 attempts
+
+**Explanation:**
+
+Clutch assembly failed to disengage properly after multiple attempts.
+
+**Common Causes & Solution:**
+
+Similar to alert 310, but focus on disengagement mechanism:
+1. Inspect clutch release mechanism
+2. Verify return spring operation
+3. Check for binding during retraction
+4. Look for obstructions
+5. Contact maintenance
+6. May need to deactivate lane
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 345 - Warning: Clutch Disengaged the Mechanism but the Prox Sensor is still Off
+
+**Explanation:**
+
+Clutch successfully disengaged mechanically, but the proximity sensor still indicates "off" state when it should be "on".
+
+**Common Causes:**
+
+- Sensor misalignment
+- Sensor malfunction
+- Wiring issue
+- Sensor dirty or obstructed
+- Mechanical position slightly off from sensor detection range
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 350 - Warning: Clutch Prox Sensor Changed Status in the Middle of a Buffer Lane Move
+
+**Explanation:**
+
+The clutch proximity sensor unexpectedly changed state during a buffer lane operation when it should have remained stable.
+
+**Common Causes:**
+
+- Vibration affecting sensor
+- Loose sensor mounting
+- Intermittent wiring connection
+- Mechanical movement or flex during operation
+- Sensor malfunction
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 371 - Auxiliary Encoders (at Outfeed & Infeed) are not Aligned to each other on the Buffer Shaft
+
+**Explanation:**
+
+The two auxiliary encoders that monitor the buffer shaft position are showing misalignment, indicating potential mechanical slippage or encoder calibration drift.
+
+**Common Causes:**
+
+- Coupling slip on one or both encoders
+- Mechanical slippage in shaft system
+- Encoder calibration drift
+- Belt or chain stretch
+- Mounting looseness
+
+**Solution:**
+
+1. Stop production on affected level
+2. Visually inspect auxiliary encoder couplings
+3. Check for loose mounting
+4. Check shaft for mechanical issues
+5. Contact maintenance - this indicates potential mechanical problem
+6. Clear alert after mechanical verification
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 372 - Auxiliary Encoder C (Infeed side) is not Aligned to Motor Encoder on Buffer Shaft
+
+**Explanation:**
+
+The auxiliary encoder on the infeed side of the buffer shaft is out of alignment with the main motor encoder, indicating slippage.
+
+**Common Causes:**
+
+- Coupling slip on infeed encoder
+- Mechanical slippage between motor and encoder
+- Encoder mounting looseness
+- Belt or coupling issue
+
+**Solution:**
+
+1. Contact maintenance
+2. Inspect infeed-side auxiliary encoder coupling
+3. Check encoder mounting
+4. Verify mechanical connection to shaft
+5. Check for any slip indicators on coupling
+6. Clear alert after inspection and correction
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 373 - Auxiliary Encoder D (Outfeed side) is not Aligned to Motor Encoder on Buffer Shaft
+
+**Explanation:**
+
+The auxiliary encoder on the outfeed side of the buffer shaft is out of alignment with the main motor encoder, indicating slippage.
+
+**Common Causes & Solution:**
+
+Same as alert 372, but for outfeed-side encoder.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 374 - Auxiliary Encoders Offsets have reached the Cumulative threshold
+
+**Explanation:**
+
+The cumulative offset errors between encoders have exceeded acceptable threshold, indicating ongoing slippage or calibration drift.
+
+**Common Causes:**
+
+- Repeated small slippages accumulating over time
+- Gradual mechanical wear
+- Encoder drift
+- Inadequate coupling tension
+- System running near limits
+
+**Alert Maintenance Team when this fault occurs**
+- It is safe to clear and resume operation
+- If the fault returns soon after, a mechanical inspection of shaft couplings and encoder attachment hardware will be necessary.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 375 - Auxiliary Encoder C (Infeed side) Coupling Slip was Detected on Buffer Shaft
+
+**Explanation:**
+
+Actual slippage detected in the coupling connecting the infeed-side auxiliary encoder to the buffer shaft.
+
+**Common Causes:**
+
+- Loose coupling
+- Worn coupling
+- Inadequate coupling clamping force
+- Shaft wear
+- Excessive torque or shock loads
+
+**Solution:**
+
+1. Contact maintenance
+2. Inspect couplings for:
+    - Tightness
+    - Wear
+    - Damage
+    - Proper seating
+3. Tighten or replace coupling as needed
+4. Clear alert after mechanical repair
+5. Monitor closely after resuming
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 376 - Auxiliary Encoder D (Outfeed side) Coupling Slip was Detected on Buffer Shaft
+
+**Explanation:**
+
+Actual slippage detected in the coupling connecting the outfeed-side auxiliary encoder to the buffer shaft.
+
+**Common Causes & Solution:**
+
+Same as alert 375, but for outfeed-side encoder coupling.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 377 - Buffer Motor Gearbox / Shaft Slip Detected. Critical Fault. Inspect Mechanics.
+
+**Explanation:**
+
+Slippage detected between the buffer motor gearbox and the shaft - a critical mechanical fault indicating major component failure or imminent failure.
+
+**Common Causes:**
+
+- Gearbox internal failure
+- Coupling failure
+- Mounting looseness
+- Major mechanical breakdown
+
+**Solution:**
+
+1. **Stop production**
+2. **DO NOT attempt to resume** without maintenance inspection
+3. Contact maintenance urgently
+4. Inspect for:
+    - Gearbox condition
+    - Shaft coupling integrity
+    - Any signs of mechanical failure
+5. Clear alert only after repairs completed and verified
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 378 - Buffer Motor Gearbox / Shaft and Coupling Slip Detected. Critical Fault. Inspect Mechanics.
+
+**Explanation:**
+
+Multiple slip points detected simultaneously - gearbox, shaft, and coupling - indicating severe mechanical problem or system-wide failure.
+
+**Common Causes:**
+
+- Multiple component failures
+- Catastrophic mechanical event
+- System overload
+- Major mechanical breakdown
+- Multiple loose connections
+
+**Solution:**
+
+1. **Stop production**
+2. **DO NOT attempt to resume** without maintenance inspection
+3. Contact maintenance and supervision urgently
+4. Full mechanical inspection required for:
+    - Gearbox
+    - All couplings
+    - Shaft integrity
+    - Mounting systems
+    - Drive components
+5. Clear alert only after complete repairs and testing
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 400 & 401 - Communication loopback timeout (Sys_Flt)
+
+**Explanation:**
+
+Communication timeout in system loopback check.
+
+**Common Causes:**
+
+- Network issue
+- Communication module fault
+- Intermittent connection problem
+
+**Solution:**
+
+1. If this is the first occurrence, safe to clear and resume
+2. If it happens repeatedly, contact support
+3. Most likely indicates network infrastructure issue
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 402 - Timeout Clutch Fault - Waiting for Clutch to be Disengaged to Resume (Sys_Flt)
+
+**Explanation:**
+
+System timed out while waiting for a clutch to fully disengage before resuming operation, indicating clutch is stuck or slow to respond.
+
+**Common Causes:**
+
+- Clutch mechanically stuck in engaged position
+- Pneumatic system slow or weak
+- Clutch return mechanism failure
+
+**Solution:**
+
+1. Check clutch physical position
+2. Check for mechanical binding
+3. Contact maintenance if issue persists
+4. Clear alert after clutch verified disengaged
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 512 - Infeed middle photocell was not blocked during an infeed case move
+
+**Explanation:**
+
+The infeed cycle started and initial photocell was blocked by incoming case, but the second photocell (infeed mid photocell) was never blocked.
+
+**Common Causes:**
+
+- Case jammed between upstream conveyor and InnoPick infeed
+- Case turned 90 degrees
+- Case fell or was displaced
+- Case too short to reach second photocell
+
+**Solution:**
+
+1. Locate the case
+2. **Important**: System expects a case on infeed belts since cycle started
+3. Clear any jamming condition
+4. Place the proper expected case correctly on infeed belts
+5. Position case carefully to avoid photocell fault during storage
+6. Verify case orientation
+7. Check case dimensions match expected product
+8. Clear alert
+9. Resume operation
+
+**See [Alert Guidelines](alert-guidelines.md#guideline-3-check-replenishment-status-after-any-infeed-alarm)** for additional infeed troubleshooting steps.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 515 - Unexpected case entering onto the infeed belts
+
+**Explanation:**
+
+The first infeed photocell was blocked when InnoPick was not expecting to receive a case.
+
+**Common Causes:**
+
+- Back-to-back cases without gap
+- Upstream conveyor motor advanced case too far
+- Debris blocking photocell
+- Extra case sent by upstream system
+- Tracking error in upstream system
+
+**Solution:**
+
+1. **Key Point**: InnoPick is NOT expecting this case
+2. Remove whatever is blocking the photocell:
+
+    - If extra case: Remove from infeed belt
+    - If debris: Clear obstruction
+    - If case sent too far: Pull back or remove
+3. **If removing an extra case:**
+
+    - Adjust count in upstream system
+    - Document the discrepancy
+    - Verify replenishment quantities
+4. Once photocell is clear, operator can resume production
+5. **Do not** leave unexpected case on infeed belt
+6. Clear alert
+7. Coordinate with upstream system operator
+
+**See [Alert Guidelines](alert-guidelines.md#guideline-3-check-replenishment-status-after-any-infeed-alarm)** for complete infeed procedures.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 516 - Infeed Case's Length Too Long
+
+**Explanation:**
+
+The measured case length was greater than expected length plus tolerance during infeed transition.
+
+**How Measurement Works:**
+
+- Case length measured as it transitions from infeed belts to first sequence conveyor position (position 0)
+- Compared to configured product length
+- Fault if outside tolerance (too long)
+
+**Common Causes:**
+
+- Wrong product/case
+- Case dimensions incorrectly configured in system
+- Turned case (length and width swapped)
+- Damaged case extended beyond normal dimensions
+- Flaps or damage extending case length
+
+**Solution:**
+
+1. Inspect the case that triggered the fault
+2. Determine if:
+
+    - Wrong product → Replace with correct case
+    - Turned case → Orient properly (length should be longer dimension)
+    - Case damaged/extended → Replace with proper case
+    - Dimensions wrong in system → Check [Products Page](../main-screens/inventory-section.md#products-page)
+3. Verify case matches expected product for this replenishment
+4. Place correct case on infeed
+5. Adjust replenishment quantity if case was rejected
+6. Clear alert
+
+**See [Alert Guidelines](alert-guidelines.md#guideline-3-check-replenishment-status-after-any-infeed-alarm)**.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 517 - Infeed Case's Length Too Short
+
+**Explanation:**
+
+The measured case length was less than expected length minus tolerance during infeed transition.
+
+**How Measurement Works:**
+
+- Case length measured as it transitions from infeed belts to first sequence conveyor position (position 0)
+- Compared to configured product length
+- Fault if outside tolerance (too short)
+
+**Common Causes:**
+
+- Damaged or collapsed case
+- Wrong product/case
+- Case dimensions incorrectly configured
+- Turned case
+
+**Solution:**
+
+1. Inspect the case that triggered the fault
+2. Determine if:
+
+    - Case is damaged → Replace with proper case
+    - Wrong product → Replace with correct case
+    - Turned case → Orient properly
+3. Verify case matches expected product for this replenishment
+4. Check product dimensions in [Products Page](../main-screens/inventory-section.md#products-page)
+5. Place correct case on infeed
+6. Adjust replenishment quantity if case was rejected
+7. Clear alert
+
+**See [Alert Guidelines](alert-guidelines.md#guideline-3-check-replenishment-status-after-any-infeed-alarm)**.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 518 - Infeed Case (on position 0) is too far downstream
+
+**Explanation:**
+
+The infeed case on position 0 (first sequence conveyor position) is positioned too far downstream from where it should be.
+
+**Common Causes:**
+
+- Case advanced too far during infeed transition
+- Timing error in infeed cycle
+- Case slipped or was pushed downstream
+- Conveyor speed mismatch
+- Case measurement started late
+
+**Solution:**
+
+1. Visually verify case position on position 0
+2. Check if case can be adjusted to correct position
+3. If case is only slightly off, may be safe to continue
+4. If significantly misplaced:
+    - Remove case
+    - Replace with properly positioned case
+    - See [Case Centering Guide](casecentering.md)
+5. Clear alert
+6. Monitor subsequent cases for repeat
+7. Contact maintenance if issue recurs
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 519 - Infeed Case (on position 0) is too far upstream
+
+See Fault 518 above.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 520 - Infeed Fault: Previous Length Check was not Completed
+
+**Explanation:**
+
+A new infeed case arrived before the previous case's length measurement was completed, indicating timing or sequencing issue.
+
+**Common Causes:**
+
+- Cases too close together at infeed
+- Previous length check taking too long
+- Infeed cycle timing error
+
+**Solution:**
+
+1. Inspect sensors for proper alignment
+2. Clear alert
+3. Monitor subsequent infeed moves
+4. Contact maintenance if alert re-occurs
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 525 - Pop-up shaft reached final upper limit - probably did not engage the pop-up mechanism
+
+**Explanation:**
+
+The steel finger measuring pop-up height tripped the uppermost limit photocell, which is higher than the pop-up should normally reach.
+
+**Common Causes:**
+
+- Air cylinder air release adjustment too slow
+- Solenoid valve malfunctioning
+- Pop-up mechanism not engaging properly
+- Mechanical binding or misalignment
+
+**Solution:**
+
+1. Check air cylinder settings:
+    - Verify air release adjustment
+    - Ensure proper timing
+2. Test solenoid valve operation
+3. Inspect pop-up mechanism:
+    - Verify engagement
+    - Check for mechanical issues
+4. Adjust timing if needed
+5. Contact maintenance for pneumatic system tuning
+6. Clear alert after resolving
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 555 - E-Stop condition active - safety is disarmed (door opened or E-Stop pressed)
+
+**Explanation:**
+
+A safety device is not in the proper 'safe' condition. This puts all levels into E-Stop status (Dark Red).
+
+**Common Causes:**
+
+- E-Stop button pressed
+- Safety door opened
+- Safety interlock open
+- Safety device malfunction
+- Wiring issue to safety system
+
+**Solution:**
+
+1. **Identify the E-Stop condition:**
+
+    - Check all E-Stop buttons → ensure all are pulled out (released)
+    - Check all safety doors → ensure all are fully closed
+    - Check safety interlocks → verify all are engaged
+    - Check guard position switches → ensure guards are in place
+
+2. **Clear the E-Stop condition:**
+
+    - Release/rotate E-Stop buttons to reset
+    - Close all doors completely
+    - Verify interlocks are engaged
+    - Check safety system indicator lights
+
+3. **After E-Stop is cleared:**
+
+    - Press Clear Alerts button
+    - All levels should return to Manual mode (Yellow)
+    - Perform visual inspection before resuming
+    - Put levels back into Automatic mode (Green)
+
+4. **If E-Stop won't clear:**
+
+    - One or more safety devices still not satisfied
+    - Systematically check each safety device
+    - Look for damaged switches or wiring
+    - Contact maintenance if cause not obvious
+
+5. **Resume operation:**
+
+    - Only after all safety conditions are satisfied
+    - Verify safe to restart
+    - Monitor closely on restart
+
+**Safety Note:** Never bypass E-Stop or safety interlocks. If safety device seems to be malfunctioning, resolve the issue properly or contact maintenance.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 556 - Open Door Preventing return to RUN Status (Door# 1-4)
+
+**Explanation:**
+
+A specific safety door (numbered 1-4) is open and preventing the system from returning to RUN status.
+
+**Common Causes:**
+
+- Door not fully closed
+- Door latch not engaging
+- Door switch malfunction
+- Door misaligned
+- Safety interlock issue
+
+**Solution:**
+
+1. Locate the problem door
+2. Ensure door is fully closed
+3. Check door latch engages properly
+4. Verify door is properly aligned
+5. Check door safety switch operation
+6. Clear alert after door is secured
+7. If door repeatedly shows open when closed, contact maintenance
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 570 - UPS power supply on battery (power loss)
+
+**Explanation:**
+
+Loss of main power. InnoPick PC is now running on UPS battery backup.
+
+**Common Causes:**
+
+- Building power failure
+- Electrical panel issue
+- Power supply fault
+
+**Solution:**
+
+1. Investigate cause of power loss
+2. Restore main power as soon as possible
+3. UPS battery has limited runtime
+4. If power not restored quickly, perform orderly shutdown
+5. Contact facility maintenance
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 571 - Mico Circuit Tripped (24V Short-Circuit)
+
+**Explanation:**
+
+The Mico circuit breaker has tripped, indicating a short circuit in the 24V system.
+
+**Common Causes:**
+
+- Short circuit in 24V wiring
+- Damaged cable or connector
+- Water or moisture in electrical components
+- Failed 24V device
+- Pinched or crushed wire
+
+**Solution:**
+
+1. **DO NOT immediately reset** - find cause first
+2. Visually inspect 24V wiring for:
+    - Damaged insulation
+    - Pinched wires
+    - Water or moisture
+    - Burn marks
+3. Check recently moved or adjusted equipment
+4. Disconnect suspect circuits if safe to do so
+5. After finding and correcting short:
+    - Reset Mico circuit breaker
+    - Power up system
+    - Clear alert
+6. Contact maintenance if cause not obvious
+7. **Never bypass** Mico protection
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 572 - Air pressure switch off - no air in system
+
+**Explanation:**
+
+Loss of air pressure in the pneumatic system.
+
+**Common Causes:**
+
+- E-Stop engaged (normal when doors open)
+- Compressor shut down
+- Air line leak or blockage
+- Pressure switch malfunction
+
+**Solution:**
+
+1. Check if E-Stop condition is active (doors open, E-Stop pressed)
+2. If E-Stop is cause:
+    - Close all security doors
+    - Clear E-Stop
+    - Power up system
+3. If fault persists after clearing E-Stop:
+    - Check compressor status
+    - Inspect for air leaks
+    - Verify air pressure gauge readings
+    - Contact maintenance if issue not obvious
+4. Clear alert once air pressure is restored
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 573 - Input/Output Murr module fault (read variable Murr_Flt)
+
+**Explanation:**
+
+Loss of communication with Murr Modules (electrical modules mounted on front of InnoPick for every 8-lane section).
+
+**Common Causes:**
+
+- Communication disruption
+- Module hardware fault
+- Wiring issue
+- E-Stop condition
+
+**Solution:**
+
+1. Ensure all security doors are closed
+2. Verify E-Stop is cleared
+3. Power up the system
+4. If fault persists:
+    - Perform visual inspection of all Murr Modules for affected level
+    - Check BUS Node Modules
+    - Compare with modules from other levels
+    - Look for any irregularities (LEDs, physical damage)
+5. Contact system expert if issue continues
+6. Document specific module or level affected
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 575 - 12-Volt Power Supply for Auxiliary Encoders Not OK
+
+**Explanation:**
+
+The 12V power supply that powers the auxiliary encoders is not functioning properly or voltage is out of range.
+
+**Common Causes:**
+
+- 12V power supply failure
+- Voltage out of specification
+- Wiring issue to encoders
+- Circuit breaker or fuse blown
+- Power supply overload
+
+**Solution:**
+
+1. Check 12V power supply status indicators
+2. Measure voltage if possible (should be ~12VDC)
+3. Check circuit breakers/fuses for 12V circuit
+4. Inspect wiring to auxiliary encoders
+5. Look for damaged cables or connectors
+6. Contact maintenance - encoder operation critical
+7. May need power supply replacement
+8. Clear alert after power restored and verified
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 576 - Warning: UPS Battery Faulted
+
+**Explanation:**
+
+The UPS (Uninterruptible Power Supply) battery has a fault condition, indicating the battery is failing or has failed.
+
+**Common Causes:**
+
+- Battery end of life
+- Battery cell failure
+- Internal battery fault
+- Charging system failure
+- Battery disconnected
+
+**Solution:**
+
+1. Check UPS status indicators
+2. System can continue running on main power
+3. **However**: No backup power protection available
+4. Schedule UPS battery replacement urgently
+5. Avoid intentional power interruptions until battery replaced
+6. Contact maintenance or UPS service provider
+7. Document battery age and fault details
+8. Clear alert after battery replaced and tested
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 577 - Warning: UPS Battery Low
+
+**Explanation:**
+
+The UPS battery charge level is low, reducing available backup runtime.
+
+**Common Causes:**
+
+- Recent power outage depleted battery
+- Battery aging and reduced capacity
+- Charging system not fully recharging battery
+- Battery nearing end of life
+- UPS continuously on battery power
+
+**Solution:**
+1. Check if main power is currently available
+2. If on main power, battery should recharge automatically
+3. Allow several hours for full recharge
+4. If battery remains low after recharge time:
+    - Battery may be failing
+    - Charging system may have issue
+    - Contact maintenance
+5. Monitor battery status
+6. Consider battery replacement if issue persists
+7. Alert may clear automatically after battery recharges
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 660 - Motion Control Following Error - Critical Fault
+
+**Explanation:**
+
+A motion control following error has occurred, meaning the actual position of a motor-driven axis has deviated too far from the commanded position. This is a critical fault indicating loss of position control.
+
+**Common Causes:**
+
+- Mechanical binding or obstruction
+- Motor or drive fault
+- Excessive load on axis
+- Broken belt or coupling
+- Drive tuning issue
+- Encoder failure
+
+**Solution:**
+
+1. Identify which axis faulted (see specific axis alerts 661-663, 667)
+2. Check for mechanical obstructions or binding
+3. Verify motor and drive operation
+4. Check belts, chains, couplings for breaks
+5. Verify encoder feedback working
+6. Contact maintenance - inspection suggested before restarting
+7. Clear alert
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 661 - Motion Control Following Error - Axis A (Infeed Conveyor) - Critical Fault
+
+**Explanation:**
+
+Following error on Axis A (Infeed Conveyor), indicating loss of position control on the infeed system.
+
+**Common Causes & Solution:**
+
+See alert 660 above, with specific focus on:
+
+- Infeed conveyor belt condition
+- Infeed motor and drive
+- Mechanical binding at infeed
+- Encoder on infeed axis
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 662 - Motion Control Following Error - Axis B (Sequence Conveyor) - Critical Fault
+
+**Explanation:**
+
+Following error on Axis B (Sequence Conveyor), indicating loss of position control on the main sequence conveyor.
+
+**Common Causes & Solution:**
+
+See alert 660 above, with specific focus on:
+
+- Sequence conveyor chain condition
+- Sequence conveyor motor and drive
+- Mechanical binding on sequence conveyor
+- Encoder on sequence conveyor axis
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 663 - Motion Control Following Error - Axis C (Buffer Conveyor) - Critical Fault
+
+**Explanation:**
+
+Following error on Axis C (Buffer/Lane Conveyor), indicating loss of position control on the buffer lane system.
+
+**Common Causes & Solution:**
+
+See alert 660 above, with specific focus on:
+
+- Buffer lane belt/chain condition
+- Buffer motor and drive
+- Mechanical binding in buffer lanes
+- Encoder on buffer axis
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 667 - Motion Control Following Error - Axis A B & C (All) - Critical Fault
+
+**Explanation:**
+
+Following error on all axes simultaneously (Infeed, Sequence, and Buffer conveyors), indicating a system-wide motion control failure.
+
+**Common Causes:**
+
+- Motion controller fault or crash
+- Power loss to all drives
+- Emergency stop activation
+- Communication loss to all drives
+- System-wide mechanical seizure (unlikely)
+- Motion controller program error
+
+**Solution:**
+
+1. Check motion controller status
+2. This is likely a controller or system-level fault, not mechanical
+3. Contact system expert
+4. May require controller restart or program reload
+5. Verify all mechanical systems after restoration
+6. Clear alert only after full system verification
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 671 - Galil Program Thread Command Error
+
+**Explanation:**
+
+An error occurred in the Galil motion controller program thread, indicating a command execution problem or program fault.
+
+**Common Causes:**
+
+- Invalid command in Galil program
+- Program logic error
+- Variable out of range
+- Array bounds exceeded
+- Syntax error in downloaded program
+
+**Solution:**
+
+1. Note any recent program changes
+2. Check Galil controller for error code using:
+    - TC1 (Tell Code)
+    - MG _TC (Message Tell Code)
+    - MG _ED0 (The line number of the last error)
+    - MG _ED1 (The thread where the error occurred)
+3. Document the specific error code
+4. Contact system expert or programmer
+5. May require program correction and reload
+6. Verify program version matches expected
+7. Clear alert after program issue corrected
+8. Test operation carefully after program changes
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 701 - Clutch Prox / Sensor Not On Before Starting Routine I/O Check
+
+**Explanation:**
+
+Before starting the routine I/O check, the clutch proximity sensor was not in the expected "on" state, indicating the clutch may not be in the proper starting position.
+
+**Common Causes:**
+
+- Clutch not in home/rest position
+- Proximity sensor misaligned
+- Sensor malfunction
+- Clutch mechanism stuck in wrong position
+- Previous move not completed properly
+
+**Solution:**
+
+1. Check physical clutch position
+2. Verify clutch is in expected rest position
+3. Check proximity sensor alignment
+4. Test sensor operation
+5. May need to manually cycle clutch to home position
+6. Verify clutch returns properly after moves
+7. If the issue cannot be resolved quickly, it is possible to [disable the lane](../main-screens/inventory-section.md#disable-enable-lane-toggle) and ignore its sensors. This allows the fault to be cleared and production to resume.
+8. Clear alert after clutch position verified
+9. Contact maintenance if sensor or clutch issue persists
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 702 - Clutch Prox Not Off after Clutch Activation - Routine I/O Check
+
+**Explanation:**
+
+During routine I/O check, after the clutch was activated (engaged), the proximity sensor did not turn off as expected.
+
+**Common Causes:**
+
+- Sensor stuck or malfunctioning
+- Clutch not moving fully when activated
+- Mechanical binding preventing full travel
+- Sensor misaligned
+- Wiring issue
+
+**Solution:**
+
+1. Observe clutch operation during activation
+2. Verify clutch moves fully when activated
+3. Check proximity sensor for proper operation
+4. Verify sensor alignment and mounting
+5. Check wiring and connections
+6. May need sensor adjustment or replacement
+7. Contact maintenance
+8. Clear alert after verification
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 703 - Clutch Prox Not On after clutch De-activation - Routine I/O Check
+
+**Explanation:**
+
+During routine I/O check, after the clutch was deactivated (disengaged), the proximity sensor did not turn on as expected.
+
+**Common Causes:**
+
+- Sensor malfunction
+- Clutch not returning to rest position
+- Return spring weak or broken
+- Mechanical binding
+- Sensor misaligned
+
+**Solution:**
+
+1. Observe clutch operation during deactivation
+2. Verify clutch returns fully to rest position
+3. Check return spring operation
+4. Check proximity sensor operation
+5. Verify sensor alignment
+6. Look for mechanical binding
+7. Contact maintenance
+8. Clear alert after clutch verified returning properly
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 706 - Missing Y Pop-Up Flag (H) after Lift - Routine I/O Check
+
+**Explanation:**
+
+During routine I/O check, after the pop-up lifted, the "Y" flag sensor (H - intermediate height) did not detect the expected flag position.
+
+**Common Causes:**
+
+- Pop-up not lifting to expected height
+- Sensor malfunction
+- Flag missing or damaged
+- Sensor misaligned
+- Pneumatic pressure insufficient
+
+**Solution:**
+
+1. Check pop-up operation and lift height
+2. Verify air pressure adequate
+3. Check "H" height sensor alignment
+4. Verify flag is present and undamaged
+5. Test sensor operation
+6. May need pneumatic or sensor adjustment
+7. Contact maintenance
+8. Clear alert after pop-up verified reaching proper height
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 707 - Z Pop-Up Flag (HH) Present after Lift - Routine I/O Check
+
+**Explanation:**
+
+During routine I/O check, after pop-up lift, the "Z" flag sensor (HH - upper limit) is detecting the flag when it shouldn't, indicating pop-up may be going too high.
+
+**Common Causes:**
+
+- Pop-up lifting too high
+- Air cylinder over-extending
+- Mechanical stop not functioning
+- Sensor misaligned or malfunction
+- Pneumatic pressure too high
+
+**Solution:**
+
+1. Check pop-up maximum lift height
+2. Verify mechanical stops functioning
+3. Check air pressure - may be too high
+4. Verify "HH" sensor alignment
+5. Check for over-travel conditions
+6. May need pneumatic adjustment
+7. Contact maintenance
+8. Clear alert after pop-up height verified correct
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 708 - Missing W Pop-Up Flag (LL) After Pop-Up De-activation - I/O Check
+
+**Explanation:**
+
+During routine I/O check, after the pop-up was deactivated (lowered), the "W" flag sensor (LL - lower limit) did not detect the flag, indicating pop-up may not be fully retracted.
+
+**Common Causes:**
+
+- Pop-up not fully retracting
+- Air cylinder not fully extending downward
+- Mechanical obstruction
+- Sensor misaligned
+- Flag damaged or missing
+
+**Solution:**
+
+1. Verify pop-up fully retracts when deactivated
+2. Check for mechanical obstructions
+3. Verify air exhaust functioning properly
+4. Check "LL" sensor alignment and operation
+5. Verify flag present and undamaged
+6. May need pneumatic or mechanical adjustment
+7. Contact maintenance
+8. Clear alert after pop-up verified retracting fully
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 709 - Buffer Lane Photocell Blocked during Routine I/O Check
+
+**Explanation:**
+
+InnoPick continuously monitors every lane's photocell and clutch proximity sensor inputs. This fault indicates one sensor was in an unexpected state.
+
+**Common Causes:**
+
+*For Photocells:*
+
+- Broken or damaged case
+- Case inducted or dispensed too close to photocell
+- Random debris (plastic, cardboard)
+- Malfunctioning photocell sensor
+- Case positioned incorrectly
+
+*For Clutch Proximity Sensors:*
+
+- Proximity sensor in wrong state
+- Clutch assembly not in expected position
+- Sensor misalignment
+- Wiring issue
+
+**Solution:**
+
+1. Note which lane the alert specifies
+2. Inspect that lane:
+    - Check photocell area for obstructions
+    - Look for broken case parts
+    - Verify clutch position (if clutch prox fault)
+3. Clear the obstruction or correct the issue
+4. Verify sensor is now in correct state
+5. Clear alert
+6. Monitor to ensure issue doesn't recur
+7. If the issue cannot be resolved quickly, it is possible to [disable the lane](../main-screens/inventory-section.md#disable-enable-lane-toggle) and ignore its sensors. This allows the fault to be cleared and production to resume.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 715 - Case Detected at Far Back of Buffer Lane
+
+**Explanation:**
+
+A case has been detected at the far back position of a buffer lane, which may indicate the lane is full or a case has moved too far back.
+
+**Common Causes:**
+
+- Lane is full to capacity
+- Case pushed too far during storage
+- Case slipped backward in lane
+- Photocell at back of lane detecting case
+
+**Solution:**
+
+1. Visually inspect the affected lane
+2. Remove extra cases or jammed cases
+3. Update lane inventory count if necessary
+4. Clear alert
+5. Monitor lane operation
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 719 - Clutch Prox Sensor Off during Routine I/O Check
+
+**Explanation:**
+
+During routine I/O monitoring, the clutch proximity sensor is in the "off" state when it should be "on", or vice versa.
+
+**Common Causes & Solution:**
+
+See alert 709 above - same troubleshooting applies for clutch proximity sensors.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 725 - Photocell above Lane was Blocked on Activated Lane
+
+**Explanation:**
+
+When a lane was activated (clutch engaged, ready to operate), the photocell above the lane was already blocked, which is unexpected and may indicate a case is in wrong position.
+
+**Common Causes:**
+
+- Case positioned too far forward in lane
+- Case or debris blocking photocell
+- Previous dispense did not complete properly
+- Case too tall or irregular
+- Sensor malfunction
+
+**Solution:**
+
+1. Inspect the affected lane
+2. Check case position in lane
+3. Verify no debris blocking photocell
+4. Ensure cases are properly positioned with gaps
+5. Check if case dimensions match configuration
+6. Adjust case position if needed
+7. Clear photocell obstruction
+8. Clear alert
+9. Monitor subsequent operations on this lane
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 781 - Infeed Motion Control (Galil) Thread Running too Long (Timeout) - Critical Fault
+
+**Explanation:**
+
+The infeed motion control thread took too long to complete, exceeding the timeout threshold. This indicates a performance issue or system overload.
+
+**Common Causes:**
+
+- High system load
+- Motion controller processing delay
+- Communication delay
+- Complex motion calculation taking too long
+- Controller near processing capacity
+
+**Solution:**
+
+1. Document what was happening when timeout occurred
+2. May be transient - safe to clear if isolated occurrence
+3. If repeated, contact system expert
+4. Clear alert
+5. Monitor for recurrence
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 782 - Sequence Conveyor Motion Control (Galil) Thread Running too Long (Timeout) - Critical Fault
+
+**Explanation:**
+
+The sequence conveyor motion control thread took too long to complete, exceeding the timeout threshold.
+
+**Common Causes & Solution:**
+
+See alert 781 above - same troubleshooting applies for sequence conveyor axis.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 783 - Buffer Motion Control (Galil) Thread Running too Long (Timeout) - Critical Fault
+
+**Explanation:**
+
+The buffer lane motion control thread took too long to complete, exceeding the timeout threshold.
+
+**Common Causes & Solution:**
+
+See alert 781 above - same troubleshooting applies for buffer/lane axis.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 791 - Motion control (Galil) thread crashed while main thread was waiting - critical fault
+
+**Explanation:**
+
+The motion controller instruction thread has crashed on the indicated level. This is a serious error that should be adequately documented.
+
+**Common Causes:**
+
+- Software exception
+- Motion controller communication failure
+- Serious system fault
+
+**Solution:**
+
+1. Contact System Expert to follow the steps below:
+2. **Capture diagnostic data BEFORE clearing the alert:**
+    - **IMPORTANT**: DMC-4040 motion controllers do NOT store error history
+    - Once alert is cleared, error information is lost forever
+    - System expert should capture information from GalilTools immediately:
+```
+     TC1         # Current error code
+     TB          # Status byte
+     TS          # System status
+     SC          # Stop code
+     MG _SCA     # Axis A stop code
+     MG _SCB     # Axis B stop code
+     MG _SCC     # Axis C stop code
+```
+
+1. **If Alert 791 has already been cleared:**
+    - Error information is no longer available
+    - Document circumstances and await recurrence
+2. **After capturing data, clear the alarm**
+3. **Perform quick visual check:**
+    - Compare affected level to Inventory Graph
+    - Verify case positions match expected
+4. **When resuming production:**
+    - Pay close attention to affected level
+    - An instruction may have been missed or duplicated
+    - Sequence conveyor may be offset by 1 position
+    - May have extra or missing case
+5. **Monitor closely** for several cycles
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 900 - Warning: Back Edge of Case was Adjusted after the Case Stored
+
+**Explanation:**
+
+After a case was stored in a lane, the system detected the back edge position was not where expected and made an adjustment to the tracking data.
+
+**Common Causes:**
+
+- Case compressed or shifted during storage
+- Case dimensions slightly different than expected
+- Normal variation in case positioning
+- Gap adjustment in lane
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 901 - Warning: Back Edge of Case was Adjusted Outward after Case Dispense (Back Edge not Seen)
+
+**Explanation:**
+
+After dispensing a case, the back edge was not detected where expected, and the system adjusted the position outward (further into the lane).
+
+**Common Causes:**
+
+- Case back edge not clearly detected
+- Case compressed in lane
+- Photocell timing issue
+- Normal variation
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 902 - Warning: Back Edge of Case was Adjusted Outward after Case Dispensed
+
+**Explanation:**
+
+After dispensing a case, the system adjusted the tracked position of the back edge outward (further into the lane).
+
+**Common Causes & Solution:**
+
+Similar to alert 901 - normal system adjustment.
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 903 - Warning: Back Edge of Case was Adjusted Inward after Case Dispensed
+
+**Explanation:**
+
+After dispensing a case, the system adjusted the tracked position of the back edge inward (closer to lane entrance).
+
+**Common Causes:**
+
+- Case extended further than expected during storage
+- Normal variation in case positioning
+- Gap adjustment
+- System self-correction
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 904 - Warning: Pulled Buffer Lane Cases Inward after Case Store (Photocell was Blocked)
+
+**Explanation:**
+
+After storing a case, the photocell was blocked (indicating insufficient gap to next case), so the system adjusted by pulling all cases in the lane inward to create proper spacing.
+
+**Common Causes:**
+
+- Case stored closer to previous case than expected
+- Normal gap adjustment
+- Case compressed during storage
+- System maintaining proper spacing
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### 905 - Warning: Pulled Buffer Lane Cases Inward after Case Dispense (Photocell was Blocked)
+
+**Explanation:**
+
+After dispensing a case, the photocell was still blocked, indicating the next case was too close, so the system adjusted by pulling remaining cases in the lane inward.
+
+**Common Causes:**
+
+- Next case too close after dispense
+- Normal gap adjustment
+- System maintaining proper spacing
+- Cases compressed in lane
+
+**Monitor and Inspect Clutch Assembly if it occurs repeatedly on the same lane**
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Outfeed Alerts
+
+### Expecting a case but there is no case present at the outfeed
+
+**Explanation:**
+
+InnoPick expects a case on the last sequence conveyor position, but no case is detected there.
+
+**Common Causes:**
+
+- Case never dispensed from lane
+- Case fell off somewhere
+- Case caught on something earlier in sequence
+- Motion controller thread crashed (see alert 791)
+- Sequence conveyor offset by one position
+- Inventory tracking error
+
+**Solution:**
+
+1. Review Inventory Graph - what case is supposed to be there?
+2. Inspect the outfeed area and upstream positions
+3. Determine why the case is not present:
+    - **Case is one spot back:** May need to jog conveyor forward
+    - **Case never dispensed:** Check source lane, may need to manually dispense
+    - **Case caught upstream:** Clear obstruction and position case correctly
+    - **Case missing entirely:** Find replacement case
+
+4. **Place needed case on last position:**
+5.
+    - Must be the correct product
+    - Must match what Inventory Graph expects
+    - Must block the last sensor on InnoPick
+6. Verify Inventory Graph matches physical reality
+7. Clear alert
+8. Resume operation
+9. Monitor closely to ensure tracking is correct
+
+**Important:** See [Alert Guidelines](alert-guidelines.md#guideline-4-determine-if-alert-is-stand-alone-or-a-symptom) - this usually indicates a tracking issue.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Not expecting a case but there is a case at the outfeed
+
+**Explanation:**
+
+A case is detected at the last position when InnoPick was not expecting one there.
+
+**Common Causes:**
+
+- Infeed case not stored properly (see infeed alerts)
+- Issue not resolved properly after previous fault
+- Case advanced without being tracked
+- Manual intervention error
+
+**Solution:**
+
+1. **Verify the case truly should not be there:**
+    - Check Inventory Graph
+    - Review recent infeed activity
+    - Check if case belongs to current sequence
+
+2. **Remove the unexpected case:**
+    - Take case off last position
+    - Do not leave it in place
+
+3. **Determine where case should go:**
+    - Look at which lanes are receiving current replenishment
+    - Compare lane inventory numbers with physical count
+    - Check [Replenishments Page](../main-screens/inventory-section.md#replenishments-page)
+
+4. **Two options for the case:**
+
+    - *Option A - Short the lane:*
+      - If lane is inaccessible or case not needed urgently
+      - Reduce lane count by 1
+      - Update in [Lane Inventory Page](../main-screens/inventory-section.md#lane-inventory-page)
+
+    - *Option B - Add to back of lane:*
+      - If lane is accessible
+      - Case may be needed soon
+      - Manually place at back of lane
+      - Update inventory count if needed
+
+5. Clear alert
+6. Resume operation
+7. Monitor to prevent recurrence
+
+**Important:** See [Alert Guidelines](alert-guidelines.md#guideline-4-determine-if-alert-is-stand-alone-or-a-symptom) - usually caused by improper infeed issue resolution.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Alert Guidelines](alert-guidelines.md) - General principles for successful alert resolution
+- [Alerts Page](../main-screens/alerts-page.md) - Viewing and managing alerts
+- [Common Issues](common-issues.md) - Frequently encountered problems
+- [Case Replacement](case-replacement.md) - Procedures for replacing cases
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
