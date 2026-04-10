@@ -64,7 +64,7 @@ The main visual grid in the center-right of the Home Page provides a quick summa
 ### Operational Controls on the Inventory Graph
 #### Build Inventory Mode
 
-<img src="../main-screens/image-1.png" width="200" alt="Pause Infeed Button Location"/>
+<img src="../main-screens/image-1.png" width="200" alt="Build InventoryButton Location"/>
 
 - Build Inventory mode prioritizes letting replenishment cases come into InnoPick over scheduling output cases.
 - [More information on Build Inventory Mode](../main-screens/administration/setup-innopick.md#build-inventory)
@@ -79,12 +79,12 @@ The main visual grid in the center-right of the Home Page provides a quick summa
 - Click the **Resume Infeed** button to resume incoming cases.
 
 #### Pause / Resume Outfeed
-<img src="../images/home/pauseoutfeed5.png" width="200" alt="Pause Infeed Button Location"/>
+<img src="../images/home/pauseoutfeed5.png" width="200" alt="Pause Outfeed Button Location"/>
 
 - Click the **Pause Outfeed** button to pause outgoing cases
 - Cases will stop and wait on the last position of InnoPick
 
-<img src="../images/home/pauseoutfeed6.png" width="200" alt="Pause Infeed Button Location"/>
+<img src="../images/home/pauseoutfeed6.png" width="300" alt="Pause Outfeed Button Location"/>
 
 - Click the **Resume Outfeed** button to resume outgoing cases.
 
@@ -104,17 +104,17 @@ The inventory graph shows:
 #### Case ready to transfer
 - When a case is to be transferred from the upstream conveyor system, it appears as a coloured triangle on that level.
 - Hover over the triangle to get more information:
-<img src="../images/home/rdy2transfer6.png" width="350" alt="Infeed Statuses"/>
+<img src="../images/home/rdy2transfer6.png" width="600" alt="Infeed Statuses"/>
 
 #### Waiting replenishment
 
-<img src="../images/home/waitingreplen5.png" width="200" alt="Waiting Replenishment"/>
+<img src="../images/home/waitingreplen5.png" width="280" alt="Waiting Replenishment"/>
 
 - When a level InnoPick is not able to schedule output cases because it is waiting for a replenishment, an **x** appears at that level.
 - This allows an operator to know immediately why a given level is not scheduling output cases.
 - Hover over the **x** to see which replenishment the level is waiting for.
 
-<img src="../images/home/waitingreplen6.png" width="400" alt="Waiting Replenishment"/>
+<img src="../images/home/waitingreplen6.png" width="500" alt="Waiting Replenishment"/>
 
 
 #### Infeed paused
@@ -123,8 +123,8 @@ The inventory graph shows:
 #### Statuses at the Outfeed
 <img src="../images/home/outfeedstatus5.png" width="200" alt="Outfeed Statuses"/>
 
-#### Merge A / B
-- If InnoPick calculates that a certain destination (Merge A or Merge B) cannot receive any more cases, it will stop scheduling output cases for that destination and indicate this with an **X** on the given level and over the given destination.
+#### Spiral A / B / C
+- If InnoPick calculates that a certain destination (Spiral A, B, or C) cannot receive any more cases, it will stop scheduling output cases for that destination and indicate this with an **X** on the given level and over the given destination.
 
 #### Outfeed ready
 - If there is a case on the last position of InnoPick and the downstream conveyor system is not ready to receive it, a stop logo appears.
@@ -140,7 +140,7 @@ The inventory graph shows:
 
 Hover your cursor over any case icon to see additional information:
 
-<img src="../images/home/hoverinfo.png" width="300" alt="Case Hover Detail"/>
+<img src="../images/home/hoverinfo.png" width="450" alt="Case Hover Detail"/>
 
 Information includes:
 
@@ -155,7 +155,7 @@ Information includes:
 
 <img src="../images/home/hoverinfo2.png" width="300" alt="Replenishment Link"/>
 
-  - Merge / Spiral destination
+  - Spiral / Spiral destination
   - Client Order PalletID
   - Case reference number
   - Source lane (where the case was dispensed from)

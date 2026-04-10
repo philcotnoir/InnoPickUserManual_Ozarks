@@ -76,7 +76,7 @@ When disabled:
 
 ### Max Consecutive Output Cases Per Destination
 
-Limits consecutive cases sent to a single destination (Merge A, B, etc.).
+Limits consecutive cases sent to a single destination (Spiral A, B, etc.).
 
 Purpose:
 
@@ -202,8 +202,8 @@ Configuration for accumulation management and output buffering.
 
 ---
 
-### Number Of Cases To Exit Merge In The Accumulation LookAhead
-How many cases IPM considers when forecasting and scheduling output. This is only applicable if Destination Decoupling is Disabled. This # is meant to reprensent how many cases can exit the Merge during the time it takes a case to travel the entire length of InnoPick.
+### Number Of Cases To Exit Spiral In The Accumulation LookAhead
+How many cases IPM considers when forecasting and scheduling output. This is only applicable if Destination Decoupling is Disabled. This # is meant to reprensent how many cases can exit the Spiral during the time it takes a case to travel the entire length of InnoPick.
 
 Impact:
 - **Higher number**: More aggressive scheduling, uses more accumulation
@@ -293,7 +293,7 @@ These settings teach InnoPick about various accumulation zones for its algorithm
 
 **Shared zone accumulation (# of zones)**
 
-- This setting teaches InnoPick how many cases can fit between the exit of the merge and the palletizer.
+- This setting teaches InnoPick how many cases can fit between the exit of the Spiral and the palletizer.
 
 **Level 1 to 5: Accumulation Length in Mm**
 
@@ -301,7 +301,7 @@ These settings teach InnoPick about various accumulation zones for its algorithm
 
 **Level 1 to 5: Zone Accumulation (# of zones)**
 
-- This setting teaches InnoPick how many individual cases can be accumulated between the exit of InnoPick and the merge.
+- This setting teaches InnoPick how many individual cases can be accumulated between the exit of InnoPick and the Spiral.
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
