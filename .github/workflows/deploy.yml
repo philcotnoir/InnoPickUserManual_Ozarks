@@ -36,7 +36,7 @@ jobs:
       - name: Build with Rspress
         env:
           # This variable is specific to this step
-          RS_PRESS_BASE: "/InnoPickUserManual_Suncoast/"
+          RS_PRESS_BASE: "/InnoPickUserManual_Ozarks/"
         run: |
           npm run build
       - name: Upload artifact
