@@ -1,10 +1,10 @@
 # Legacy content audit — InnoPick Manual (Ozarks)
 
-Generated 2026-08-18. Every path below was re-verified with a fresh grep across all `docs/**/*.mdx` files and confirmed to have **zero references**, and confirmed to still exist on disk. Nothing has been deleted — this is a list for manual review.
+Generated 2026-08-18, updated same day after review. All 27 files listed below (24 screenshots + 3 logo/vendor files) have been deleted (`git rm`, staged for commit).
 
 This repo shows signs of having been cloned from an earlier "Suncoast" customer's InnoPick manual: the docs content was rebranded to Ozarks, but some screenshots/logos from that original site were never cleaned out. (The `package.json` name and the GitHub Pages deploy base path had the same issue — those have already been fixed to `innopick-manual-ozarks` / `/InnoPickUserManual_Ozarks/`.)
 
-## Unreferenced screenshots (safe to delete — 27 files)
+## Unreferenced screenshots (deleted — 24 files)
 
 None of these appear in any `<img src="...">` tag anywhere in `docs/`.
 
@@ -27,7 +27,7 @@ None of these appear in any `<img src="...">` tag anywhere in `docs/`.
 **`docs/images/inventory/`**
 - `image26.png`, `image27.png`, `image29.png`, `image30.png`, `image37.png`
 
-## Unused logo/vendor files (3 of 4 files in `docs/images/logos/`)
+## Unused logo/vendor files (deleted — 3 of 4 files in `docs/images/logos/`)
 
 Only `image1.png` (the InnoPick logo shown on the homepage) is referenced. The other three look like true cross-customer leftovers, not Ozarks-specific content:
 
@@ -35,13 +35,11 @@ Only `image1.png` (the InnoPick logo shown on the homepage) is referenced. The o
 - **`image3.jpeg`** — "NūMove Robotics & Vision" vendor logo.
 - **`image4.png`** — "DRL Systems" (integrator) logo.
 
-## Flagged for your judgment (not touched)
+## Flagged items — resolved
 
-These aren't clear-cut deletions — they need a decision from someone who knows the current Ozarks setup:
-
-1. **`docs/index.mdx` title inconsistency** — the page banner (line 3) reads "InnoPick Manager **Operations** Manual" but the welcome paragraph (line 18) calls it the "InnoPick Manager **Technical** Manual." Worth picking one name.
-2. **"MixMaster" references** — appears repeatedly as "MixMaster (or equivalent WMS/WCS)" in `home-page.mdx`, `inventory-section.mdx`, `case-sequence.mdx`, `common-issues.mdx`, `user-manager.mdx`, and `alert-guidelines.mdx`. This may be intentional generic terminology, or it may be a holdover from the Suncoast site's actual WMS — worth confirming it's still correct for Ozarks.
-3. **`to be added/` folder** (repo root) — `image (107).png`, `image (108).png`. Not legacy, but staged/unintegrated content sitting outside `docs/` that nothing currently links to.
+1. **`docs/index.mdx` title inconsistency** — resolved: standardized on "Operations Manual" (the welcome paragraph on line 18 was changed from "Technical Manual" to match the page banner).
+2. **"MixMaster" references** — left as-is per decision; these are being kept as intentional generic terminology.
+3. **`to be added/` folder** (repo root) — left as-is per decision; still unintegrated, nothing currently links to it.
 
 ## Already fixed (Suncoast config leftovers)
 
