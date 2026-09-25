@@ -10,6 +10,22 @@ This page addresses frequently encountered issues that may not have specific ale
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
+## Common Issues Sub-Sections:
+- [Outfeed Issues](#outfeed-issues)
+    - [Cases Not Exiting InnoPick](#cases-not-exiting-innopick)
+    - [Next Outfeed Case Data is not in Outbound Conveyor System](#next-outfeed-case-data-is-not-in-outbound-conveyor-system)
+    - [Next Outfeed Case not advancing despite all conditions met](#next-outfeed-case-not-advancing-despite-all-conditions-met)
+- [Infeed Issues](#infeed-issues)
+    - [Cases Not Being Inducted](#cases-not-being-inducted)
+    - [Wrong Product Being Inducted](#wrong-product-being-inducted)
+    - [Inventory Tracking Not Matching Physical Reality](#inventory-tracking-not-matching-physical-reality)
+    - [Frequent Alerts on Specific Products](#frequent-alerts-on-specific-products)
+- [Recovery After a Power Loss / Outage / Brownout / Interruption](#recovery-after-a-power-loss)
+    - [Initial Checks and Adjustments](#initial-checks-and-adjustments)
+    - [Recovery Actions](#recovery-actions)
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
 ## Outfeed Issues
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
@@ -266,6 +282,48 @@ The steps for each case transfer are as follows:
 
 5. **Consider removing product from InnoPick**
     - If the product is very problematic such that it is slowing down the entire production and the problems cannot be resolved by parameter changes, it may be better to remove the product from automation.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Recovery After a Power Loss / Outage / Brownout / Interruption
+
+Before restarting InnoPick, a number of things must be checked. 
+
+### Initial Checks and Adjustments
+
+Log into InnoPick Manager and try to clear alarms and rearm the system so that all the levels are yellow (Manual Mode).
+
+- If necessary, deal with alerts that will not clear. If a storing or dispensing move was interrupted, a case may be blocking a lane sensor.
+- If no obvious alert is listed but the level will not rearm, remember to check for filtered alerts by going to the [Alerts Page](../main-screens/alerts-page.md) and removing all filters.
+- If no cause can be found, try the recovery action [Clear alarm on level](../main-screens/administration/recovery-actions.md#clear-alarm-on-level).
+- If nothing works, contact remote support.
+
+Since a power outage sometimes stops the machine instantly, it is important to check for any half-finished moves, especially on the sequence conveyor.
+
+Refer to the [Inventory Graph](../main-screens/home-page.md#inventory-graph) and carefully review the position of the cases.
+
+If any discrepancy is noticed between the Inventory Graph and the physical location of the cases, use the [Manual Motion Control](../main-screens/administration/manual-motion-control.md#level-operations) page to jog the sequence conveyors (carefully) in order to place them where the system thinks they are.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+### Recovery Actions
+
+1. **Send the case length to each level:**
+    - Go to **Administration > [Recovery Actions](../main-screens/administration/recovery-actions.md)** and execute [Set InCasLen](../main-screens/administration/recovery-actions.md#set-incaslen) for each level in turn.
+    - This action requires the level as an input, so it must be run once per level.
+
+2. **Send variables to the motion controller:**
+    - Go to **Administration > Setup InnoPick > [Site Levels](../main-screens/administration/setup-innopick.md#site-levels)** and click the **"Send variables to Galil"** button for all levels (scroll down to see each level in turn).
+
+Once these have been executed and all the levels are in Manual Mode, put just one level in auto to begin with and monitor.
+
+- Look for handshake issues at the end of the level, or at the infeed.
+- If a case will not exit and the downstream system is ready and without fault, then follow the steps in [Cases Not Exiting InnoPick](#cases-not-exiting-innopick).
+- Be aware that some dispense or storing moves are sometimes missed following a power loss. You may have a case that was supposed to be stored and is still on the sequence conveyor, or a case that should have been dispensed and is missing.
+- Note that the cases on the blue infeed belts sometimes need to be removed and the replenishment shorted.
+- If the level refuses to move despite everything looking OK, contact remote support.
+
+When one level has been sufficiently verified and is back in production status, move on to the next level until all levels are back in production.
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 

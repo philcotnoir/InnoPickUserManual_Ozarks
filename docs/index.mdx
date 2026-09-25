@@ -42,12 +42,17 @@ Quick lookup tables for alert codes and system status indicators.
 
 ## User Roles
 
-Access to certain features depends on your user role:
+Access to certain features depends on your user role. Roles are cumulative: each role includes every permission of the roles above it, plus the one listed beside it.
 
-- **Admin**: Full access to all controls and settings
-- **Manager**: Access to operational settings, but not site configuration
-- **Clerk**: Access to operate the system for production
-- **Guest**: View-only access to browse screens
+| Role | Adds |
+|------|------|
+| **Terminal user** | Basic terminal access |
+| **Operator** | Regular system operation actions, recovery actions and configurations |
+| **Supervisor** | Advanced system operation actions, recovery actions and configurations |
+| **Admin** | Account and system access management |
+| **Technical Support** | Technical support configurations and recovery actions |
+
+**Guest**: View-only access to browse screens.
 
 See [User Manager](main-screens/administration/user-manager.md) for more information.
 

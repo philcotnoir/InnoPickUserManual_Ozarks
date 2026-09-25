@@ -17,7 +17,7 @@
 - [Core Setup](#core-setup)
 
 
-The Setup InnoPick page contains configuration settings for InnoPick's internal operation. Access is typically restricted to Admin users and system integrators.
+The Setup InnoPick page contains configuration settings for InnoPick's internal operation. Access is typically restricted to the Admin and Technical Support roles.
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
@@ -76,7 +76,7 @@ When disabled:
 
 ### Max Consecutive Output Cases Per Destination
 
-Limits consecutive cases sent to a single destination (Spiral A, B, etc.).
+Limits consecutive cases sent to a single destination (Spiral A, B, or C).
 
 Purpose:
 
@@ -286,7 +286,7 @@ InnoPick can operate in two modes regarding accumulation:
 
 ---
 
-### Destination A / B Accumulation
+### Destination A / B / C Accumulation
 <img src="../../images/administration/buffer2.png" width="500" alt="Buffer Settings"/>
 
 These settings teach InnoPick about various accumulation zones for its algorithmic calculations.
@@ -295,11 +295,11 @@ These settings teach InnoPick about various accumulation zones for its algorithm
 
 - This setting teaches InnoPick how many cases can fit between the exit of the Spiral and the palletizer.
 
-**Level 1 to 5: Accumulation Length in Mm**
+**Level 1 to 6: Accumulation Length in Mm**
 
 - This setting teaches InnoPick the length of low pressure accumulation where cases are accumulated in a way that they bunch up together with no gaps.
 
-**Level 1 to 5: Zone Accumulation (# of zones)**
+**Level 1 to 6: Zone Accumulation (# of zones)**
 
 - This setting teaches InnoPick how many individual cases can be accumulated between the exit of InnoPick and the Spiral.
 

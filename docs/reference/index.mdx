@@ -145,14 +145,19 @@ See [Alert Reference](../troubleshooting/alert-reference.md) for complete list w
 
 ## User Roles and Permissions
 
-| Role | Access Level | Capabilities |
-|------|-------------|--------------|
-| **Admin** | Full | All features, settings, user management |
-| **Manager** | Operational | Operations, not site config |
-| **Clerk** | Production | Monitor and operate, limited config |
-| **Guest** | View-only | Browse screens, no changes |
+Roles are cumulative: each role includes every permission of the roles above it, plus the one listed beside it.
 
-See [User Manager](../main-screens/administration/user-manager.md) for details.
+| Role | Adds |
+|------|------|
+| **Terminal user** | Basic terminal access |
+| **Operator** | Regular system operation actions, recovery actions and configurations |
+| **Supervisor** | Advanced system operation actions, recovery actions and configurations |
+| **Admin** | Account and system access management |
+| **Technical Support** | Technical support configurations and recovery actions |
+
+**Guest**: View-only access to browse screens.
+
+See [User Manager](../main-screens/administration/user-manager.md#user-roles) for details.
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
