@@ -12,20 +12,108 @@ In other words, a deadlock is when a level of InnoPick is too full and becomes s
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
+## Deadlocks Sub-Sections:
+- [Types of Deadlocks](#types-of-deadlocks)
+- [Detecting a Deadlock](#detecting-a-deadlock)
+- [Recovering with Recommended Actions](#recovering-with-recommended-actions)
+- [Preview Deadlock](#preview-deadlock)
+- [Just-In-Time Deadlocks](#just-in-time-deadlocks)
+- [Re-Caught and Unresolved Deadlocks](#re-caught-and-unresolved-deadlocks)
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
 ## Types of Deadlocks
 
-There are two types of deadlocks:
+There are three deadlock states:
 
 1. **Preview deadlock (forecast)** - warns the operator that a deadlock will occur unless something is done to avert it.
 2. **Just-in-Time deadlock** - the system is in a deadlock state and cannot proceed without an operator intervention.
+3. **Re-caught deadlock** - a deadlock that was detected previously but never actually resolved, and has now been caught again.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Detecting a Deadlock
+
+When a level enters a deadlock, InnoPick signals it in two places in the left-hand panel:
+
+- The tile for the affected level turns **red**.
+- A red **Level(s) in deadlock... View details** indicator appears below the level tiles.
+
+<img src="../images/alerts/deadlockindicator.png" width="250" alt="Level in deadlock indicator"/>
+
+Click **View details** to open the DeadLock recovery dialog and begin [recovering with recommended actions](#recovering-with-recommended-actions).
+
+When no level is in deadlock, this same indicator shows a green **No deadLock**.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Recovering with Recommended Actions
+
+InnoPick can calculate one or more ways out of a deadlock and then apply the fix for you. This is the fastest way to resolve a deadlock and should be your first approach.
+
+### Step 1: Open the DeadLock recovery dialog
+
+Click **View details** on the deadlock indicator.
+
+<img src="../images/alerts/deadlockrecovery.png" width="600" alt="DeadLock recovery dialog"/>
+
+The dialog reports, for the level in deadlock:
+
+- **Output case reference** - the case InnoPick is trying to output but cannot.
+- **Needed product for output case** - the product required to service that output case.
+- **Last replenishment processed** - the most recent replenishment InnoPick handled on that level, with its case number.
+
+If more than one level is in deadlock, each level appears as its own tab.
+
+---
+
+### Step 2: Get recovery actions
+
+Click **Get recovery actions**. InnoPick calculates the possible ways to break the deadlock and presents them as a list of options to choose from.
+
+<img src="../images/alerts/deadlockrecommended.png" width="400" alt="Recommended actions for a level in deadlock"/>
+
+Each option is a complete fix on its own. An option is either:
+
+- **A single add** - for example, *Add 12 case(s) in lane 42*.
+- **A chain of removals** - for example, *Remove 32 case(s) from lane 39* AND *Remove 40 case(s) from lane 34*, and so on. Every step in the chain must be completed for the option to work.
+
+Select whichever option is simplest to carry out on the floor. A single add is often less work than a chain of removals spread across many lanes, but the best choice is whatever is physically easiest at the time.
+
+---
+
+### Step 3: Apply the recommendation
+
+With your option selected, click **Apply recommendation**. A confirmation appears restating the action to be performed.
+
+<img src="../images/alerts/deadlockapply.png" width="400" alt="Apply recommendation confirmation with Origin HU field"/>
+
+1. Enter the **Origin HU** - the handling unit the cases are coming from. **Confirm** remains disabled until this field is filled in.
+2. Click **Confirm** to apply the recommendation, or **Cancel** to go back and choose a different option.
+
+**Note: Carry out the physical case moves described by the option. The recommendation tells InnoPick what the inventory should be; the cases still have to be added to or removed from the lanes on the floor.**
+
+---
+
+### Step 4: Verify the deadlock is cleared
+
+On success, the dialog shows a green checkmark and **No level in deadlock at the moment**. The indicator in the left panel changes to a green **No deadLock**.
+
+<img src="../images/alerts/deadlocksuccess.png" width="500" alt="Deadlock cleared confirmation"/>
+
+Return the level to Auto and confirm that production resumes.
+
+If the level will not resume, or a deadlock is caught again on the same level, see [Re-Caught and Unresolved Deadlocks](#re-caught-and-unresolved-deadlocks).
 
 <hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
 ## Preview Deadlock
 
-<img src="../images/alerts/deadlock1.png" width="1000" alt="Deadlock1"/>
+A preview deadlock is a forecast. The system has determined that a deadlock will occur with the current case sequence, and has halted so that it can be averted before it happens.
 
-"Level 2. Deadlock detected with given sequence after processing 940 output cases, 850 input cases."
+<img src="../images/alerts/deadlock1.png" width="1000" alt="Preview deadlock alert"/>
+
+*"Level 2. Deadlock detected with given sequence after processing 940 output cases, 850 input cases."*
 
 The following is an example alarm message for a preview deadlock:
 
@@ -33,7 +121,7 @@ The following is an example alarm message for a preview deadlock:
 
 ---
 
-**Key Points:**
+### Key Points
 
 - The deadlock is detected after processing a number of output and input cases
 - This forecasts a future deadlock if nothing changes
@@ -42,7 +130,7 @@ The following is an example alarm message for a preview deadlock:
 
 ---
 
-**Understanding the Causes of Preview Deadlocks**
+### Understanding the Causes of Preview Deadlocks
 
 Preview deadlocks can be generated by one or more factors.
 
@@ -53,7 +141,7 @@ Preview deadlocks can be generated by one or more factors.
 
 ---
 
-**Resolving a Preview Deadlock**
+### Resolving a Preview Deadlock
 
 - Note the product # and use the [Products Page](../main-screens/inventory-section.md#products-page) to re-assign it to another level.
 - After this, the system will re-calculate the case sequence and may re-generate a preview deadlock fault depending on the context.
@@ -75,21 +163,56 @@ Example of a Just-in-Time deadlock alert message:
 
 ---
 
-**Resolving a Just-In-Time Deadlock**
-The simplest way to resolve a Just-In-Time deadlock is to:
+### Resolving a Just-In-Time Deadlock
+
+Start with [Recovering with Recommended Actions](#recovering-with-recommended-actions). InnoPick will usually calculate a fix and apply it for you.
+
+If no recommendation is offered, or none of the options can be carried out, resolve the deadlock manually using one of the two approaches below.
+
+---
+
+### Manual Recovery: Free Up Lanes
 
 1. Identify some lanes on that level with low inventory (1-10 cases)
 2. Makes sure those cases are not immediately going to be needed (using the [Case Sequence Page](../main-screens/case-sequence.md))
 3. Empty those lanes, making them available.
 
-Alternatively, another option is to:
+---
 
-1. Identify which product InnoPick needs in order to resume outputting cases (this is listed in the Alert message).
+### Manual Recovery: Supply the Needed Product
+
+1. Identify which product InnoPick needs in order to resume outputting cases (this is listed in the Alert message, and in the DeadLock recovery dialog as **Needed product for output case**).
 2. Filter the [Case Sequence Page](../main-screens/case-sequence.md) to see how many cases of this product are needed.
 3. Manually load this number of cases of the required product in an empty lane on that level of InnoPick.
 4. Edit the inventory for that lane and save the changes, using the [Inventory Page](../main-screens/inventory-section.md#alter-quantity).
 5. Upon saving the changes to the inventory change, the system should recalculate the case sequence for that level and production should resume.
-6. If needed, use the "Recalculate Level" [Recovery Action](../main-screens/administration/recovery-actions.md).
+6. If needed, use the "Reprocess level" [Recovery Action](../main-screens/administration/recovery-actions.md).
 
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
 
+## Re-Caught and Unresolved Deadlocks
 
+If a deadlock is cleared from the Alerts page but the underlying condition was never actually fixed, InnoPick will catch it again and report it as a re-caught deadlock.
+
+<img src="../images/alerts/deadlockrecaught.png" width="1200" alt="Re-caught deadlock alert message"/>
+
+Example of a re-caught deadlock alert message:
+
+- *Level 3: Re-caught previously un-resolved/un-handled deadlock 'Level 3: DeadLock detected with given sequence after processing 205 output cases, 124 input cases. The product that is needed to service the next output case '8f674198-bf77-4414-8ff3-72d396993b26|Truck R11112X|P78419533|914570' is '112260'. Last input case attempted to process was '8f674198-bf77-4414-8ff3-72d396993b26|Truck R11112X|P78419464|914852' with product reference '117603'. If this happens during preview, we still have a chance to avoid the deadlock by manually reassigning this product to a different level than 3. Aborting!'*
+
+**Note: Clearing a deadlock alert does not resolve the deadlock. The inventory on the level has to actually change - either by applying a recommended action or by recovering manually - before the level can resume production.**
+
+If you see a re-caught deadlock, treat it as an unresolved Just-In-Time deadlock and work through [Recovering with Recommended Actions](#recovering-with-recommended-actions) again. If it keeps recurring on the same level, contact remote support.
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />
+
+## Related Topics
+
+- [Alert Guidelines](alert-guidelines.md) - General troubleshooting principles
+- [Alert Reference](alert-reference.md) - Specific alert code resolutions
+- [Common Issues](common-issues.md) - Other frequently encountered problems
+- [Case Sequence Page](../main-screens/case-sequence.md) - Checking which cases are needed next
+- [Products Page](../main-screens/inventory-section.md#products-page) - Re-assigning products between levels
+- [Recovery Actions](../main-screens/administration/recovery-actions.md) - Reprocess level and other advanced tools
+
+<hr style={{border: "none", height: "3px", backgroundColor: "#747474", margin: "2em 0"}} />

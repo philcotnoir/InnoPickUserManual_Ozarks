@@ -92,3 +92,9 @@ This recovery action clears internal processor errors and restarts the level pro
 
 - This is used after certain critical faults whose descriptions indicate to the operator that the level processor has been stopped.
 
+### Reprocess level
+
+This recovery action re-processes the output cases and pending replenishments for a given level.
+
+- This is used after manually changing a level's inventory, when the level does not pick up the change and resume production on its own. See [Deadlocks](../../troubleshooting/deadlocks.md#manual-recovery-supply-the-needed-product) for the procedure this is part of.
+
